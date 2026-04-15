@@ -32,6 +32,7 @@
         color: var(--navy);
         overflow-x: hidden;
         font-family: "Montserrat", sans-serif;
+        -webkit-font-smoothing: antialiased;
       }
       h1,
       h2,
@@ -44,7 +45,7 @@
       /* Navigation */
       nav {
         background-color: rgba(0, 43, 91, 0.98);
-        padding: 1.2rem 5%;
+        padding: 1rem 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -58,13 +59,14 @@
         font-weight: 800;
         color: var(--gold);
         text-transform: uppercase;
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         font-size: 1.1rem;
       }
+
       .nav-links {
         list-style: none;
         display: flex;
-        gap: 25px;
+        gap: 20px;
       }
       .nav-links a {
         text-decoration: none;
@@ -79,14 +81,24 @@
         color: var(--gold);
       }
 
+      /* Mobile Menu Toggle */
+      .menu-toggle {
+        display: none;
+        color: var(--gold);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
       /* Hero */
       .hero {
         position: relative;
-        height: 85vh;
+        height: 75vh; /* Reduced height for better mobile viewing */
         display: flex;
         align-items: center;
-        padding: 0 10%;
+        padding: 0 5%;
         color: var(--white);
+        text-align: center;
+        justify-content: center;
       }
       #hero-video {
         position: absolute;
@@ -104,39 +116,39 @@
         width: 100%;
         height: 100%;
         background: linear-gradient(
-          90deg,
-          rgba(0, 43, 91, 0.9) 0%,
-          rgba(0, 43, 91, 0.2) 100%
+          0deg,
+          rgba(0, 43, 91, 0.8) 0%,
+          rgba(0, 43, 91, 0.3) 100%
         );
         z-index: -1;
       }
+
       .hero h1 {
-        font-size: 4.5rem;
-        line-height: 1;
-        margin-bottom: 20px;
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        line-height: 1.1;
+        margin-bottom: 15px;
       }
       .hero p {
-        font-size: 1.1rem;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
         color: var(--gold);
-        margin-bottom: 40px;
-        letter-spacing: 2px;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
         text-transform: uppercase;
       }
 
-      /* Suite Layout - Modern Alternating Overlaps */
+      /* Suite Layout */
       .suite-section {
-        padding: 120px 5%;
+        padding: 60px 5%;
         background: var(--white);
       }
       .suite-wrapper {
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
       }
-
       .suite-item {
         display: flex;
         align-items: center;
-        margin-bottom: 150px;
+        margin-bottom: 80px;
         position: relative;
       }
       .suite-item:nth-child(even) {
@@ -145,63 +157,54 @@
 
       .suite-img {
         flex: 0 0 55%;
-        height: 500px;
+        height: 400px;
         overflow: hidden;
         position: relative;
         z-index: 1;
+        border-radius: 4px;
       }
       .suite-img img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: var(--transition);
-      }
-      .suite-img::after {
-        content: "";
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        pointer-events: none;
       }
 
       .suite-content {
         flex: 0 0 50%;
         background: var(--navy);
         color: var(--white);
-        padding: 70px;
+        padding: 40px;
         margin-left: -10%;
         z-index: 2;
         position: relative;
-        box-shadow: 20px 20px 0 var(--gold);
+        box-shadow: 10px 10px 0 var(--gold);
       }
       .suite-item:nth-child(even) .suite-content {
         margin-left: 0;
         margin-right: -10%;
-        box-shadow: -20px 20px 0 var(--gold);
+        box-shadow: -10px 10px 0 var(--gold);
       }
 
       .suite-content h2 {
-        font-size: 2.8rem;
+        font-size: 2rem;
         color: var(--gold);
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
       .suite-content p {
+        font-size: 0.95rem;
         font-weight: 300;
-        line-height: 1.8;
-        margin-bottom: 30px;
+        line-height: 1.6;
+        margin-bottom: 25px;
         opacity: 0.9;
       }
 
       .btn-gold {
-        padding: 14px 40px;
+        padding: 12px 30px;
         border: 1px solid var(--gold);
         color: var(--gold);
         text-decoration: none;
         text-transform: uppercase;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 2px;
         transition: var(--transition);
@@ -210,138 +213,115 @@
       .btn-gold:hover {
         background: var(--gold);
         color: var(--navy);
-        transform: translateY(-3px);
       }
 
-      /* Care Grids */
+      /* Grids */
       .grid-section {
-        padding: 100px 5%;
+        padding: 60px 5%;
         text-align: center;
       }
       .grid-section h2 {
-        font-size: 3rem;
-        margin-bottom: 60px;
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        margin-bottom: 40px;
         text-transform: uppercase;
-        letter-spacing: 4px;
-        color: var(--navy);
+        letter-spacing: 2px;
       }
 
       .custom-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        max-width: 1300px;
+        gap: 20px;
+        max-width: 1200px;
         margin: 0 auto;
       }
-
       .feature-card {
         background: var(--white);
-        position: relative;
         overflow: hidden;
         transition: var(--transition);
         border: 1px solid #eee;
-      }
-      .feature-card:hover {
-        transform: translateY(-10px);
-        border-color: var(--gold);
+        border-radius: 4px;
       }
       .feature-card img {
         width: 100%;
-        height: 280px;
+        height: 220px;
         object-fit: cover;
-        transition: transform 0.8s ease;
-      }
-      .feature-card:hover img {
-        transform: scale(1.1);
       }
       .feature-card h4 {
-        padding: 25px;
-        background: var(--white);
-        font-size: 1rem;
+        padding: 20px;
+        font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 1px;
+        color: var(--navy);
       }
 
-      /* Life Section - Dark Theme */
+      /* Life Section */
       .life-section {
         background: var(--navy-dark);
-        padding: 120px 5%;
-      }
-      .life-section h2 {
+        padding: 60px 5%;
         color: var(--gold);
       }
       .life-section .feature-card {
-        background: transparent;
-        border: 1px solid rgba(197, 160, 89, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(197, 160, 89, 0.2);
       }
       .life-section .feature-card h4 {
-        background: var(--navy-dark);
         color: var(--gold);
       }
 
-      /* Score & Map */
+      /* Split Score Strip */
       .split-strip {
         display: flex;
+        flex-wrap: wrap;
         background: var(--gold);
       }
       .split-map {
-        flex: 1.5;
-        height: 450px;
+        flex: 1 1 100%;
+        height: 300px;
+        min-width: 300px;
       }
       .split-score {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 50px;
+        flex: 1 1 100%;
+        padding: 40px 20px;
+        text-align: center;
         color: var(--navy);
       }
       .split-score h3 {
-        font-size: 7rem;
+        font-size: 5rem;
         line-height: 1;
         font-weight: 900;
-        margin: 15px 0;
-      }
-      .split-score p {
-        text-transform: uppercase;
-        font-weight: 700;
-        letter-spacing: 2px;
       }
 
       /* Footer */
       footer {
-        background: #001228;
+        background: #000c1d;
         color: #fff;
-        padding: 80px 10% 40px;
+        padding: 60px 5% 30px;
         border-top: 4px solid var(--gold);
       }
       .footer-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 50px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
       }
       .footer-col h4 {
         color: var(--gold);
-        margin-bottom: 25px;
+        margin-bottom: 15px;
         text-transform: uppercase;
         font-size: 0.8rem;
-        letter-spacing: 2px;
       }
       .footer-col p {
         opacity: 0.7;
-        font-size: 0.9rem;
-        margin-bottom: 12px;
-        line-height: 1.6;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
       }
       .socials {
         display: flex;
-        gap: 15px;
-        margin-top: 25px;
+        gap: 10px;
+        margin-top: 20px;
       }
       .socials a {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         border: 1px solid var(--gold);
         border-radius: 50%;
         display: flex;
@@ -349,21 +329,43 @@
         justify-content: center;
         color: var(--gold);
         text-decoration: none;
-        transition: 0.3s;
-      }
-      .socials a:hover {
-        background: var(--gold);
-        color: var(--navy);
       }
 
-      @media (max-width: 1024px) {
-        .hero h1 {
-          font-size: 3rem;
+      /* MOBILE RESPONSIVE FIXES */
+      @media (max-width: 768px) {
+        nav {
+          padding: 1rem 5%;
         }
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: var(--navy-dark);
+          flex-direction: column;
+          gap: 0;
+          display: none; /* Toggle this with JS */
+          border-bottom: 2px solid var(--gold);
+        }
+        .nav-links.active {
+          display: flex;
+        }
+        .nav-links li {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-links a {
+          display: block;
+          padding: 15px 5%;
+          font-size: 0.9rem;
+        }
+        .menu-toggle {
+          display: block;
+        }
+
         .suite-item,
         .suite-item:nth-child(even) {
           flex-direction: column;
-          align-items: flex-start;
+          margin-bottom: 50px;
         }
         .suite-img,
         .suite-content {
@@ -372,12 +374,29 @@
           margin: 0 !important;
           box-shadow: none !important;
         }
+        .suite-img {
+          height: 250px;
+        }
         .suite-content {
-          padding: 40px 30px;
+          padding: 30px 20px;
           text-align: center;
         }
-        .split-strip {
-          flex-direction: column-reverse;
+
+        .split-map {
+          height: 250px;
+        }
+        .split-score h3 {
+          font-size: 4rem;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .split-map {
+          flex: 1.5;
+          height: 450px;
+        }
+        .split-score {
+          flex: 1;
         }
       }
     </style>
@@ -385,6 +404,14 @@
   <body>
     <nav>
       <div class="logo">Pennine Care</div>
+      <div
+        class="menu-toggle"
+        onclick="
+          document.querySelector('.nav-links').classList.toggle('active')
+        "
+      >
+        <i class="fas fa-bars"></i>
+      </div>
       <ul class="nav-links">
         <li><a href="#">About Us</a></li>
         <li><a href="#suites">Suites</a></li>
@@ -395,7 +422,7 @@
     </nav>
 
     <header class="hero">
-      <video autoplay muted loop id="hero-video">
+      <video autoplay muted loop playsinline id="hero-video">
         <source src="c.mp4" type="video/mp4" />
       </video>
       <div class="hero-overlay"></div>
@@ -410,36 +437,27 @@
       <div class="suite-wrapper">
         <div class="suite-item">
           <div class="suite-img">
-            <img
-              src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1000&auto=format&fit=crop"
-              alt="Pennine Suite"
-            />
+            <img src="PennineSuite.png" alt="Pennine Suite" />
           </div>
           <div class="suite-content">
             <h2>Pennine Suite</h2>
             <p>
-              With fully secured accommodation and 24-hour support, Pennine
-              suite caters to a variety of needs. Our person-centred approach
-              ensures residents live a lifestyle of their choosing, supported
-              with dignity and respect.
+              With fully secured accommodation and 24-hour support. Our
+              person-centred approach ensures residents live a lifestyle of
+              their choosing.
             </p>
             <a href="#" class="btn-gold">Our Homes</a>
           </div>
         </div>
-
         <div class="suite-item">
           <div class="suite-img">
-            <img
-              src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=1000&auto=format&fit=crop"
-              alt="Moorland Suite"
-            />
+            <img src="MoorlandSuite.png" alt="Moorland Suite" />
           </div>
           <div class="suite-content">
             <h2>Moorland Suite</h2>
             <p>
               A specialized male-only unit designed for residents with unique
-              requirements. Supported by our expert caring staff, providing a
-              secure and dignified environment in the High Peak District.
+              requirements. Supported by our expert caring staff.
             </p>
             <a href="#" class="btn-gold">Find Out More</a>
           </div>
@@ -451,67 +469,41 @@
       <h2>Specialist Care</h2>
       <div class="custom-grid">
         <div class="feature-card">
-          <img
-            src="https://images.unsplash.com/photo-1581578017093-cd30fce4eeb7?auto=format&fit=crop&w=500"
-            alt="Dementia Care"
-          />
+          <img src="1.png" alt="Dementia" />
           <h4>Dementia Care</h4>
         </div>
         <div class="feature-card">
-          <img
-            src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500"
-            alt="Male Only Unit"
-          />
+          <img src="2.png" alt="Male Only" />
           <h4>Male only Unit</h4>
         </div>
         <div class="feature-card">
-          <img
-            src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=500"
-            alt="Younger People"
-          />
+          <img src="3.png" alt="Community" />
           <h4>Community Care</h4>
         </div>
         <div class="feature-card">
-          <img
-            src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500"
-            alt="Emotional Needs"
-          />
+          <img src="4.png" alt="Emotional" />
           <h4>Emotional & Physical</h4>
         </div>
       </div>
     </section>
 
     <section id="life" class="life-section">
-      <h2 style="text-align: center; margin-bottom: 60px">
-        Life at Pennine Care
-      </h2>
+      <h2 style="text-align: center; margin-bottom: 40px">Life at Pennine</h2>
       <div class="custom-grid">
         <div class="feature-card">
-          <img
-            src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=500"
-            alt="Life at Pennine"
-          />
+          <img src="5.png" />
           <h4>Life at Pennine</h4>
         </div>
         <div class="feature-card">
-          <img
-            src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500"
-            alt="Person Centered"
-          />
-          <h4>Person Centered Care</h4>
+          <img src="6.png" />
+          <h4>Person Centered</h4>
         </div>
         <div class="feature-card">
-          <img
-            src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=500"
-            alt="Activities"
-          />
+          <img src="7.png" />
           <h4>Engaging Activities</h4>
         </div>
         <div class="feature-card">
-          <img
-            src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500"
-            alt="Nutrition"
-          />
+          <img src="8.png" />
           <h4>Nutrition & Dining</h4>
         </div>
       </div>
@@ -529,9 +521,9 @@
         ></iframe>
       </div>
       <div class="split-score">
-        <p>Independent Review Score</p>
+        <p>Independent Score</p>
         <h3>9.8</h3>
-        <p>Out of 10 Total Score</p>
+        <p>Out of 10</p>
       </div>
     </div>
 
@@ -547,7 +539,6 @@
           <h4>Information</h4>
           <p>Privacy Policy</p>
           <p>Complaints Procedure</p>
-          <p>Careers at Pennine</p>
         </div>
         <div class="footer-col">
           <h4>Social Media</h4>
@@ -561,12 +552,12 @@
       <div
         style="
           text-align: center;
-          margin-top: 60px;
+          margin-top: 40px;
           font-size: 0.7rem;
           opacity: 0.4;
         "
       >
-        © 2026 Pennine Care Centre | Excellence in Senior Care.
+        © 2026 Pennine Care Centre.
       </div>
     </footer>
   </body>
