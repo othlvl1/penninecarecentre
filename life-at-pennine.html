@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pennine Care Centre | Premium Care in Glossop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #002b5b;
+        --gold: #d4af37;
+        --cream: #f9f7f2;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: var(--cream);
+        color: var(--navy);
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", serif;
+      }
+      .bg-navy {
+        background-color: var(--navy);
+      }
+      .text-gold {
+        color: var(--gold);
+      }
+      .btn-gold {
+        background-color: var(--gold);
+        color: white;
+        transition: 0.3s;
+        border-radius: 12px;
+      }
+      .btn-gold:hover {
+        background-color: #b8952d;
+        transform: translateY(-2px);
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background: var(--gold);
+        transition: 0.3s;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-sm py-4 px-6 flex justify-between items-center"
+    >
+      <img
+        src="http://penninecarecentre.uk/wp-content/uploads/2023/10/APEXLIVE__4_-removebg-preview.png"
+        alt="Pennine Logo"
+        class="h-12"
+      />
+      <div
+        class="hidden lg:flex space-x-8 font-semibold text-sm uppercase tracking-wider"
+      >
+        <a href="/" class="nav-link">About Us</a>
+        <a href="/pennine-suite" class="nav-link">Pennine Suite</a>
+        <a href="/moorland-suite" class="nav-link">Moorland Suite</a>
+        <a href="/services" class="nav-link">Services</a>
+        <a href="/life-at-pennine" class="nav-link">Life at Pennine</a>
+        <a href="/team" class="nav-link">Team</a>
+        <a href="/contact" class="nav-link">Contact Us</a>
+      </div>
+      <a
+        href="#book"
+        class="bg-navy text-white px-6 py-3 rounded-[12px] font-bold text-xs hover:bg-gold transition"
+        >BOOK A VISIT</a
+      >
+    </nav>
+
+    <header
+      class="relative h-[85vh] flex items-center justify-center pt-20 overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-black/40 z-10"></div>
+      <img
+        src="http://penninecarecentre.uk/wp-content/uploads/2023/12/10-scaled.jpg"
+        class="absolute inset-0 w-full h-full object-cover"
+        alt="Care Centre Interior"
+      />
+      <div class="relative z-20 text-center text-white px-4">
+        <h1 class="text-5xl md:text-7xl mb-4">Caring Is What We Do Best</h1>
+        <p class="text-xl max-w-2xl mx-auto font-light leading-relaxed">
+          Situated in the picturesque Peak District countryside on the outskirts
+          of Glossop.
+        </p>
+      </div>
+    </header>
+
+    <section class="bg-white py-12">
+      <div
+        class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-80 filter grayscale hover:grayscale-0 transition duration-500"
+      >
+        <img
+          src="http://penninecarecentre.uk/wp-content/uploads/2023/10/last-1-150x120.jpg"
+          class="mx-auto h-16 object-contain"
+          alt="Award 1"
+        />
+        <img
+          src="http://penninecarecentre.uk/wp-content/uploads/2023/10/last-2-150x120.jpg"
+          class="mx-auto h-16 object-contain"
+          alt="Award 2"
+        />
+        <img
+          src="http://penninecarecentre.uk/wp-content/uploads/2023/10/last-3.jpg"
+          class="mx-auto h-16 object-contain"
+          alt="Award 3"
+        />
+        <img
+          src="http://penninecarecentre.uk/wp-content/uploads/2023/10/last-4.jpg"
+          class="mx-auto h-16 object-contain"
+          alt="Award 4"
+        />
+      </div>
+    </section>
+
+    <section class="py-24 px-6 max-w-7xl mx-auto space-y-32">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="text-gold font-bold tracking-widest uppercase text-sm"
+            >Luxury Accommodation</span
+          >
+          <h2 class="text-4xl mt-2 mb-6">The Pennine Suite</h2>
+          <p class="text-gray-600 leading-relaxed mb-8">
+            With fully secured accommodation and 24-hour support, Pennine suite
+            caters to a variety of needs. Our person-centred approach ensures
+            that residents are encouraged to live a lifestyle of their choosing
+            and are supported with dignity and respect.
+          </p>
+          <a
+            href="/pennine-suite"
+            class="btn-gold px-8 py-4 inline-block font-bold"
+            >DISCOVER THE SUITE</a
+          >
+        </div>
+        <div class="rounded-[12px] overflow-hidden shadow-2xl">
+          <img
+            src="http://penninecarecentre.uk/wp-content/uploads/2024/01/Image-1-reception-1024x461.jpg"
+            alt="Pennine Suite Reception"
+          />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div
+          class="order-2 md:order-1 rounded-[12px] overflow-hidden shadow-2xl"
+        >
+          <img
+            src="http://penninecarecentre.uk/wp-content/uploads/2023/10/care-home-accommodation.jpg"
+            alt="Moorland Bedroom"
+          />
+        </div>
+        <div class="order-1 md:order-2">
+          <span class="text-gold font-bold tracking-widest uppercase text-sm"
+            >Specialist Male Care</span
+          >
+          <h2 class="text-4xl mt-2 mb-6">The Moorland Suite</h2>
+          <p class="text-gray-600 leading-relaxed mb-8">
+            Our Moorland Suite is a male-only unit catering to residents with
+            special requirements. Supported by our caring staff, this unique
+            unit provides dignified and quality care in a warm, tailored
+            environment.
+          </p>
+          <a
+            href="/moorland-suite"
+            class="btn-gold px-8 py-4 inline-block font-bold"
+            >LEARN MORE</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#e2d0a7] py-24 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl text-navy">Specialist Care Services</h2>
+          <div class="w-24 h-1 bg-navy mx-auto mt-4"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="group cursor-pointer">
+            <img
+              src="http://penninecarecentre.uk/wp-content/uploads/2024/01/Image-3-Moorland.jpg"
+              class="rounded-t-[12px] w-full h-48 object-cover"
+            />
+            <div
+              class="bg-white p-6 rounded-b-[12px] text-center group-hover:bg-navy group-hover:text-white transition"
+            >
+              <h4 class="font-bold uppercase tracking-tighter">
+                Dementia Care
+              </h4>
+            </div>
+          </div>
+          <div class="group cursor-pointer">
+            <img
+              src="http://penninecarecentre.uk/wp-content/uploads/2024/01/Image-4.jpg"
+              class="rounded-t-[12px] w-full h-48 object-cover"
+            />
+            <div
+              class="bg-white p-6 rounded-b-[12px] text-center group-hover:bg-navy group-hover:text-white transition"
+            >
+              <h4 class="font-bold uppercase tracking-tighter">
+                Male only Unit
+              </h4>
+            </div>
+          </div>
+          <div class="group cursor-pointer">
+            <img
+              src="http://penninecarecentre.uk/wp-content/uploads/2024/01/Image-5-IG-singer.jpg"
+              class="rounded-t-[12px] w-full h-48 object-cover"
+            />
+            <div
+              class="bg-white p-6 rounded-b-[12px] text-center group-hover:bg-navy group-hover:text-white transition"
+            >
+              <h4 class="font-bold uppercase tracking-tighter">
+                Younger Adults
+              </h4>
+            </div>
+          </div>
+          <div class="group cursor-pointer">
+            <img
+              src="http://penninecarecentre.uk/wp-content/uploads/2023/12/5-1024x733.jpg"
+              class="rounded-t-[12px] w-full h-48 object-cover"
+            />
+            <div
+              class="bg-white p-6 rounded-b-[12px] text-center group-hover:bg-navy group-hover:text-white transition"
+            >
+              <h4 class="font-bold uppercase tracking-tighter">
+                Emotional Support
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-navy text-white py-20 px-6">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16">
+        <div>
+          <img
+            src="http://penninecarecentre.uk/wp-content/uploads/2023/10/APEXLIVE__4_-removebg-preview.png"
+            alt="Logo"
+            class="h-16 mb-8 brightness-0 invert"
+          />
+          <p class="text-sm opacity-70 leading-loose">
+            To provide exceptional care, delivered by compassionate people, in
+            the highest quality homes.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-gold uppercase tracking-widest mb-8">
+            Contact Information
+          </h4>
+          <p class="mb-4">📞 01457 862466</p>
+          <p class="mb-4">📧 Admin@nyms-services.com</p>
+          <p class="opacity-70">Turnlee Road, Glossop, SK13 6JW</p>
+        </div>
+        <div>
+          <h4 class="text-gold uppercase tracking-widest mb-8">Connect</h4>
+          <div class="flex space-x-4">
+            <p class="text-sm">Find us on Facebook & Instagram</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 text-center text-xs opacity-50"
+      >
+        © 2024 Pennine Care Centre. Part of Signature Care Homes.
+      </div>
+    </footer>
+  </body>
+</html>

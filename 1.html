@@ -42,10 +42,10 @@
         font-family: "Playfair Display", serif;
       }
 
-      /* NAVIGATION - Modern Glassmorphism */
+      /* Navigation */
       nav {
         background-color: rgba(0, 43, 91, 0.98);
-        padding: 1.2rem 5%;
+        padding: 1rem 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -62,10 +62,11 @@
         letter-spacing: 2px;
         font-size: 1.1rem;
       }
+
       .nav-links {
         list-style: none;
         display: flex;
-        gap: 25px;
+        gap: 20px;
       }
       .nav-links a {
         text-decoration: none;
@@ -79,6 +80,8 @@
       .nav-links a:hover {
         color: var(--gold);
       }
+
+      /* Mobile Menu Toggle */
       .menu-toggle {
         display: none;
         color: var(--gold);
@@ -86,10 +89,10 @@
         cursor: pointer;
       }
 
-      /* HERO SECTION */
+      /* Hero */
       .hero {
         position: relative;
-        height: 85vh;
+        height: 75vh; /* Reduced height for better mobile viewing */
         display: flex;
         align-items: center;
         padding: 0 5%;
@@ -119,32 +122,33 @@
         );
         z-index: -1;
       }
+
       .hero h1 {
         font-size: clamp(2.5rem, 8vw, 4.5rem);
-        line-height: 1;
-        margin-bottom: 20px;
+        line-height: 1.1;
+        margin-bottom: 15px;
       }
       .hero p {
         font-size: clamp(0.9rem, 4vw, 1.1rem);
         color: var(--gold);
         margin-bottom: 30px;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         text-transform: uppercase;
       }
 
-      /* EDITORIAL SUITE LAYOUT */
+      /* Suite Layout */
       .suite-section {
-        padding: 100px 5%;
+        padding: 60px 5%;
         background: var(--white);
       }
       .suite-wrapper {
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
       }
       .suite-item {
         display: flex;
         align-items: center;
-        margin-bottom: 120px;
+        margin-bottom: 80px;
         position: relative;
       }
       .suite-item:nth-child(even) {
@@ -152,56 +156,55 @@
       }
 
       .suite-img {
-        flex: 0 0 60%;
-        height: 500px;
+        flex: 0 0 55%;
+        height: 400px;
         overflow: hidden;
         position: relative;
         z-index: 1;
-        border-radius: 2px;
+        border-radius: 4px;
       }
       .suite-img img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: var(--transition);
       }
 
       .suite-content {
-        flex: 0 0 45%;
+        flex: 0 0 50%;
         background: var(--navy);
         color: var(--white);
-        padding: 60px;
+        padding: 40px;
         margin-left: -10%;
         z-index: 2;
         position: relative;
-        box-shadow: 20px 20px 0 var(--gold);
+        box-shadow: 10px 10px 0 var(--gold);
       }
       .suite-item:nth-child(even) .suite-content {
         margin-left: 0;
         margin-right: -10%;
-        box-shadow: -20px 20px 0 var(--gold);
+        box-shadow: -10px 10px 0 var(--gold);
       }
 
       .suite-content h2 {
-        font-size: 2.5rem;
+        font-size: 2rem;
         color: var(--gold);
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
       .suite-content p {
-        font-size: 1rem;
+        font-size: 0.95rem;
         font-weight: 300;
-        line-height: 1.8;
-        margin-bottom: 30px;
+        line-height: 1.6;
+        margin-bottom: 25px;
         opacity: 0.9;
       }
 
       .btn-gold {
-        padding: 14px 35px;
+        padding: 12px 30px;
         border: 1px solid var(--gold);
         color: var(--gold);
         text-decoration: none;
         text-transform: uppercase;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 2px;
         transition: var(--transition);
@@ -210,155 +213,115 @@
       .btn-gold:hover {
         background: var(--gold);
         color: var(--navy);
-        transform: translateY(-3px);
       }
 
-      /* DYNAMIC GRIDS */
+      /* Grids */
       .grid-section {
-        padding: 100px 5%;
+        padding: 60px 5%;
         text-align: center;
       }
       .grid-section h2 {
-        font-size: 3rem;
-        margin-bottom: 60px;
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        margin-bottom: 40px;
         text-transform: uppercase;
-        letter-spacing: 4px;
-        color: var(--navy);
-        position: relative;
-        display: inline-block;
-        padding-bottom: 15px;
-      }
-      .grid-section h2::after {
-        content: "";
-        position: absolute;
-        width: 40%;
-        height: 3px;
-        background: var(--gold);
-        bottom: 0;
-        left: 30%;
+        letter-spacing: 2px;
       }
 
       .custom-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        max-width: 1300px;
+        gap: 20px;
+        max-width: 1200px;
         margin: 0 auto;
       }
-
       .feature-card {
         background: var(--white);
-        position: relative;
         overflow: hidden;
         transition: var(--transition);
         border: 1px solid #eee;
         border-radius: 4px;
       }
-      .feature-card:hover {
-        transform: translateY(-15px);
-        border-color: var(--gold);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      }
       .feature-card img {
         width: 100%;
-        height: 280px;
+        height: 220px;
         object-fit: cover;
-        transition: transform 0.8s ease;
-      }
-      .feature-card:hover img {
-        transform: scale(1.1);
       }
       .feature-card h4 {
-        padding: 25px;
-        font-size: 1rem;
+        padding: 20px;
+        font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 1px;
         color: var(--navy);
       }
 
-      /* LIFE SECTION - DARK MODE */
+      /* Life Section */
       .life-section {
         background: var(--navy-dark);
-        padding: 120px 5%;
-      }
-      .life-section h2 {
+        padding: 60px 5%;
         color: var(--gold);
       }
       .life-section .feature-card {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(197, 160, 89, 0.2);
       }
       .life-section .feature-card h4 {
         color: var(--gold);
       }
 
-      /* SPLIT SCORE & MAP STRIP */
+      /* Split Score Strip */
       .split-strip {
         display: flex;
         flex-wrap: wrap;
         background: var(--gold);
-        min-height: 400px;
       }
       .split-map {
-        flex: 1.5;
-        min-width: 350px;
-        height: 450px;
+        flex: 1 1 100%;
+        height: 300px;
+        min-width: 300px;
       }
       .split-score {
-        flex: 1;
-        padding: 60px;
+        flex: 1 1 100%;
+        padding: 40px 20px;
         text-align: center;
         color: var(--navy);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
       }
       .split-score h3 {
-        font-size: 7rem;
+        font-size: 5rem;
         line-height: 1;
         font-weight: 900;
-        margin: 10px 0;
-      }
-      .split-score p {
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
       }
 
-      /* FOOTER */
+      /* Footer */
       footer {
         background: #000c1d;
         color: #fff;
-        padding: 80px 10% 40px;
+        padding: 60px 5% 30px;
         border-top: 4px solid var(--gold);
       }
       .footer-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 50px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
       }
       .footer-col h4 {
         color: var(--gold);
-        margin-bottom: 25px;
+        margin-bottom: 15px;
         text-transform: uppercase;
         font-size: 0.8rem;
-        letter-spacing: 2px;
       }
       .footer-col p {
         opacity: 0.7;
-        font-size: 0.9rem;
-        margin-bottom: 12px;
-        line-height: 1.6;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
       }
       .socials {
         display: flex;
-        gap: 15px;
-        margin-top: 25px;
+        gap: 10px;
+        margin-top: 20px;
       }
       .socials a {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         border: 1px solid var(--gold);
         border-radius: 50%;
         display: flex;
@@ -366,19 +329,43 @@
         justify-content: center;
         color: var(--gold);
         text-decoration: none;
-        transition: 0.3s;
-      }
-      .socials a:hover {
-        background: var(--gold);
-        color: var(--navy);
       }
 
       /* MOBILE RESPONSIVE FIXES */
-      @media (max-width: 968px) {
+      @media (max-width: 768px) {
+        nav {
+          padding: 1rem 5%;
+        }
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: var(--navy-dark);
+          flex-direction: column;
+          gap: 0;
+          display: none; /* Toggle this with JS */
+          border-bottom: 2px solid var(--gold);
+        }
+        .nav-links.active {
+          display: flex;
+        }
+        .nav-links li {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-links a {
+          display: block;
+          padding: 15px 5%;
+          font-size: 0.9rem;
+        }
+        .menu-toggle {
+          display: block;
+        }
+
         .suite-item,
         .suite-item:nth-child(even) {
           flex-direction: column;
-          margin-bottom: 60px;
+          margin-bottom: 50px;
         }
         .suite-img,
         .suite-content {
@@ -388,27 +375,28 @@
           box-shadow: none !important;
         }
         .suite-img {
-          height: 300px;
+          height: 250px;
         }
         .suite-content {
-          padding: 40px 20px;
+          padding: 30px 20px;
           text-align: center;
-          border-bottom: 8px solid var(--gold);
         }
-        .nav-links {
-          display: none;
-        }
-        .menu-toggle {
-          display: block;
-        }
-        .split-strip {
-          flex-direction: column-reverse;
-        }
+
         .split-map {
-          height: 300px;
+          height: 250px;
         }
         .split-score h3 {
-          font-size: 5rem;
+          font-size: 4rem;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .split-map {
+          flex: 1.5;
+          height: 450px;
+        }
+        .split-score {
+          flex: 1;
         }
       }
     </style>
@@ -439,8 +427,8 @@
       </video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p>Experience Excellence</p>
-        <h1>The Gold Standard <br />of Senior Care.</h1>
+        <p>Experience the Difference</p>
+        <h1>The Gold Standard <br />of Care.</h1>
         <a href="#suites" class="btn-gold">Discover Our Suites</a>
       </div>
     </header>
@@ -454,13 +442,13 @@
           <div class="suite-content">
             <h2>Pennine Suite</h2>
             <p>
-              With fully secured accommodation and 24-hour support, Pennine
-              suite caters to a variety of needs with dignity and respect.
+              With fully secured accommodation and 24-hour support. Our
+              person-centred approach ensures residents live a lifestyle of
+              their choosing.
             </p>
             <a href="#" class="btn-gold">Our Homes</a>
           </div>
         </div>
-
         <div class="suite-item">
           <div class="suite-img">
             <img src="MoorlandSuite.png" alt="Moorland Suite" />
@@ -468,8 +456,8 @@
           <div class="suite-content">
             <h2>Moorland Suite</h2>
             <p>
-              A specialized male-only unit designed for unique requirements,
-              providing a secure and dignified environment.
+              A specialized male-only unit designed for residents with unique
+              requirements. Supported by our expert caring staff.
             </p>
             <a href="#" class="btn-gold">Find Out More</a>
           </div>
@@ -499,8 +487,8 @@
       </div>
     </section>
 
-    <section id="life" class="life-section grid-section">
-      <h2>Life at Pennine Care</h2>
+    <section id="life" class="life-section">
+      <h2 style="text-align: center; margin-bottom: 40px">Life at Pennine</h2>
       <div class="custom-grid">
         <div class="feature-card">
           <img src="5.png" />
@@ -533,9 +521,9 @@
         ></iframe>
       </div>
       <div class="split-score">
-        <p>Care Quality Rating</p>
+        <p>Independent Score</p>
         <h3>9.8</h3>
-        <p>Independent Resident Score</p>
+        <p>Out of 10</p>
       </div>
     </div>
 
@@ -551,10 +539,9 @@
           <h4>Information</h4>
           <p>Privacy Policy</p>
           <p>Complaints Procedure</p>
-          <p>Careers at Pennine</p>
         </div>
         <div class="footer-col">
-          <h4>Follow Us</h4>
+          <h4>Social Media</h4>
           <div class="socials">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
@@ -565,12 +552,12 @@
       <div
         style="
           text-align: center;
-          margin-top: 60px;
+          margin-top: 40px;
           font-size: 0.7rem;
           opacity: 0.4;
         "
       >
-        © 2026 Pennine Care Centre | Excellence in Senior Care.
+        © 2026 Pennine Care Centre.
       </div>
     </footer>
   </body>
