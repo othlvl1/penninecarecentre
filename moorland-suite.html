@@ -3,72 +3,473 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Moorland Suite | Male-Only Specialist Care</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Moorland Suite | Pennine Care Centre</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
+        --gold: #c5a059;
         --navy: #002b5b;
-        --gold: #d4af37;
-        --cream: #f9f7f2;
+        --cream: #faf9f6;
+        --white: #ffffff;
+        --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        --font-primary: "Montserrat", sans-serif;
+        --font-serif: "Playfair Display", serif;
+        --whatsapp-green: #25d366;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
       body {
-        font-family: "Montserrat", sans-serif;
-        background-color: var(--navy);
-        color: white;
+        background-color: var(--cream);
+        color: var(--navy);
+        overflow-x: hidden;
+        font-family: var(--font-primary);
+        line-height: 1.65;
       }
       h1,
-      h2 {
-        font-family: "Playfair Display", serif;
+      h2,
+      h3,
+      h4,
+      .logo {
+        font-family: var(--font-serif);
+        font-weight: 600;
+      }
+
+      /* Navigation */
+      nav {
+        background-color: rgba(0, 43, 91, 0.98);
+        padding: 0.5rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 2px solid var(--gold);
+      }
+      .logo {
+        color: var(--white);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-size: 1.6rem;
+        text-decoration: none;
+      }
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--white);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        transition: var(--transition);
+      }
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+      .nav-links a.active {
+        color: var(--gold);
+      }
+
+      /* Hero */
+      .hero-sub {
+        height: 60vh;
+        background:
+          linear-gradient(rgba(0, 43, 91, 0.7), rgba(0, 43, 91, 0.7)),
+          url("MoorlandSuite.png");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-align: center;
+        margin-top: 60px;
+      }
+      .hero-sub h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        color: var(--gold);
+      }
+
+      /* Content Sections */
+      .section-padding {
+        padding: 80px 10%;
+      }
+      .centered-header {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto 50px;
+      }
+      .centered-header h2 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+        color: var(--navy);
+      }
+      .gold-divider {
+        width: 80px;
+        height: 3px;
+        background: var(--gold);
+        margin: 20px auto;
+      }
+
+      .feature-row {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        margin-bottom: 60px;
+      }
+      .feature-row img {
+        width: 50%;
+        border-radius: 4px;
+        box-shadow: 20px 20px 0 var(--gold);
+      }
+      .feature-text {
+        width: 50%;
+      }
+
+      /* Feature Grid */
+      .key-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+      .feature-box {
+        background: var(--white);
+        padding: 40px;
+        border: 1px solid #eee;
+        text-align: center;
+        transition: var(--transition);
+      }
+      .feature-box:hover {
+        transform: translateY(-10px);
+        border-color: var(--gold);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+      .feature-box i {
+        font-size: 2.5rem;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
+      .feature-box h3 {
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+      }
+
+      /* Tabs/Info Styling */
+      .info-tabs {
+        background: var(--navy);
+        color: var(--white);
+        padding: 80px 10%;
+      }
+      .tab-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+      }
+      .tab-item h3 {
+        color: var(--gold);
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--navy);
+        color: #fff;
+        padding: 80px 10% 40px;
+        border-top: 4px solid var(--gold);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 50px;
+      }
+      .footer-col h4 {
+        color: var(--gold);
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+      }
+      .footer-title {
+        font-weight: 700;
+        color: var(--gold);
+        margin-bottom: 10px;
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+      }
+      .footer-link {
+        color: inherit;
+        text-decoration: none;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 60px;
+        padding-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .footer-copy {
+        font-size: 0.75rem;
+        opacity: 0.5;
+      }
+      .back-to-top {
+        color: var(--gold);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .socials a {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .socials a:hover {
+        background: var(--white);
+        color: var(--navy);
+      }
+
+      .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: var(--whatsapp-green);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        z-index: 1001;
+        text-decoration: none;
+      }
+
+      @media (max-width: 968px) {
+        .feature-row {
+          flex-direction: column;
+        }
+        .feature-row img,
+        .feature-text {
+          width: 100%;
+        }
+        .section-padding {
+          padding: 60px 5%;
+        }
+        .nav-links {
+          display: none;
+        }
       }
     </style>
   </head>
   <body>
-    <nav
-      class="w-full bg-navy py-4 px-10 flex justify-between items-center border-b border-white/10"
-    >
-      <div class="text-xl font-bold tracking-tighter serif">
-        PENNINE <span class="text-gold">CARE</span>
-      </div>
-      <div
-        class="hidden lg:flex space-x-8 text-xs uppercase font-bold tracking-widest"
-      >
-        <a href="index.html">About Us</a>
-        <a href="pennine-suite.html">Pennine Suite</a>
-        <a href="moorland-suite.html" class="text-gold">Moorland Suite</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-      </div>
+    <nav>
+      <a class="logo" href="index.html">Pennine Care</a>
+      <ul class="nav-links">
+        <li><a href="pennine-suite.html">Penine Suite</a></li>
+        <li><a href="moorland-suite.html" class="active">Moorland Suite</a></li>
+        <li><a href="life-at-pennine.html">Life at Pennine</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
 
-    <section
-      class="py-24 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center"
-    >
-      <img
-        src="https://images.unsplash.com/photo-1505691938895-1758d7eaa511?auto=format&fit=crop&q=80"
-        class="rounded-3xl shadow-2xl order-2 md:order-1"
-        alt="Male Residential Unit"
-      />
-      <div class="order-1 md:order-2">
-        <h1 class="text-6xl mb-6 text-gold">Moorland Suite</h1>
-        <h2 class="text-2xl mb-4 font-light">
-          A Specialized Male-Only Community
-        </h2>
-        <p class="text-lg leading-relaxed opacity-80 mb-8">
-          Catering to gentlemen with specific requirements, the Moorland Suite
-          provides a dignified and quality care environment. Supported by expert
-          staff, we focus on maintaining independence and social engagement for
-          our residents.
+    <header class="hero-sub">
+      <div class="hero-content">
+        <p>Specialist Care for Men</p>
+        <h1>Moorland Suite</h1>
+      </div>
+    </header>
+
+    <section class="section-padding">
+      <div class="centered-header">
+        <h2>Life at Moorland Suite</h2>
+        <div class="gold-divider"></div>
+        <p>
+          Our Moorland Suite is dedicated to providing a male only environment.
+          There are 28 bedrooms all of which have accessible ensuite bathrooms.
+          There are large communal spaces which all have exquisite views of the
+          majestic Peak District. The Moorland suite is unique and offers
+          targeted support, care and activities suited for male residents. The
+          team members are by and large male staff members.
         </p>
-        <a
-          href="contact.html"
-          class="bg-gold text-white px-10 py-4 rounded-xl font-bold inline-block hover:scale-105 transition"
-          >REQUEST DETAILS</a
-        >
+      </div>
+
+      <div class="feature-row">
+        <img src="5.PNG" alt="Care on Moorland Suite" />
+        <div class="feature-text">
+          <p>
+            We provide a hydration station that encourages residents to drink
+            whenever they wish and an opportunity to enjoy a variety of snacks.
+            To ensure that our residents are supported in these communal spaces,
+            there is a nursing station where trained staff are ready to assist
+            should the need arise.
+          </p>
+          <br />
+          <p>
+            The suite has its own entrance with good access to parking for
+            family, friends and those involved in the resident’s care. Bedrooms
+            and day spaces boast scenic views of the stunning peak district and
+            there are several larger rooms. For those of our residents who enjoy
+            spending time outside, we have spacious private gardens which offer
+            the opportunity to embrace the outdoors.
+          </p>
+        </div>
       </div>
     </section>
+
+    <section class="info-tabs">
+      <div class="tab-grid">
+        <div class="tab-item">
+          <h3>Community Spaces</h3>
+          <p>
+            Designed for interaction and socialising. The suite has a large,
+            spacious, and bright lounge decorated in dementia-aware tones,
+            creating a warm, inviting atmosphere. Includes a well-stocked
+            kitchenette for access to food throughout the day.
+          </p>
+        </div>
+        <div class="tab-item">
+          <h3>Bedrooms</h3>
+          <p>
+            Carefully furnished ensuite bedrooms provide a safe and personal
+            space. We encourage residents to personalize their rooms with
+            possessions and mementos. Each room is fitted with technological
+            aids like nurse call systems and sensor mats.
+          </p>
+        </div>
+        <div class="tab-item">
+          <h3>Gardens</h3>
+          <p>
+            Large, private, and secure gardens featuring mature trees, shrubs,
+            and flowers. Residents can engage in gardening or enjoy the fresh
+            air from seating areas overlooking the calming beauty of the Peak
+            District.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding">
+      <div class="centered-header">
+        <h2>Key Features</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="key-features">
+        <div class="feature-box">
+          <i class="fas fa-hand-holding-usd"></i>
+          <h3>No Hidden Costs</h3>
+          <p>
+            Transparent pricing ensures peace of mind for families during the
+            transition to care.
+          </p>
+        </div>
+        <div class="feature-box">
+          <i class="fas fa-users"></i>
+          <h3>Dedicated Team</h3>
+          <p>
+            Our largely male staff team is specifically trained to support the
+            unique needs of our residents.
+          </p>
+        </div>
+        <div class="feature-box">
+          <i class="fas fa-leaf"></i>
+          <h3>Fresh Environment</h3>
+          <p>
+            Situated in the Peak District, offering a clean, healthy, and scenic
+            living space.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <p class="footer-title">PENNINE CARE CENTRE</p>
+          <p>Turnlee Road, Glossop,<br />Derbyshire, SK13 6JW</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <p><a href="#" class="footer-link">About Us</a></p>
+          <p><a href="#suites" class="footer-link">Our Suites</a></p>
+          <p><a href="#care" class="footer-link">Care Services</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Information</h4>
+          <p><a href="#" class="footer-link">Careers</a></p>
+          <p><a href="#" class="footer-link">Privacy Policy</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Get in Touch</h4>
+          <p>
+            <i
+              class="fas fa-phone-alt"
+              style="color: var(--gold); margin-right: 10px"
+            ></i>
+            01457 862466
+          </p>
+          <p>
+            <i
+              class="fas fa-envelope"
+              style="color: var(--gold); margin-right: 10px"
+            ></i>
+            Admin@nyms-services.com
+          </p>
+          <div
+            class="socials"
+            style="margin-top: 25px; display: flex; gap: 15px"
+          >
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © Copyright 2026 Signature Care Homes | All Rights Reserved.
+        </div>
+        <a href="#" class="back-to-top"
+          >Back to top <i class="fas fa-arrow-up" style="margin-left: 5px"></i
+        ></a>
+      </div>
+    </footer>
+
+    <a href="https://wa.me/441457862466" class="whatsapp-float" target="_blank"
+      ><i class="fab fa-whatsapp"></i
+    ></a>
   </body>
 </html>
