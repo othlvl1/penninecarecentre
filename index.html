@@ -59,7 +59,8 @@
         width: 100%;
         top: 0;
         z-index: 1000;
-        border-bottom: 2px solid var(--gold);
+        /* Increased border-bottom as requested */
+        border-bottom: 4px solid var(--gold);
       }
       .logo {
         font-weight: 800;
@@ -67,6 +68,7 @@
         text-transform: uppercase;
         letter-spacing: 4px;
         font-size: 1.6rem;
+        text-decoration: none;
       }
       .nav-links {
         list-style: none;
@@ -89,7 +91,6 @@
         color: var(--gold);
       }
 
-      /* Hero Video & Controls */
       .hero {
         position: relative;
         height: 85vh;
@@ -152,7 +153,6 @@
         line-height: 1.2;
       }
 
-      /* Slider Styling */
       .suite-img {
         position: relative;
         flex: 0 0 60%;
@@ -203,7 +203,6 @@
         color: var(--navy);
       }
 
-      /* General Sections */
       .intro-box {
         background: var(--navy);
         color: var(--white);
@@ -440,6 +439,13 @@
       .footer-link {
         color: inherit;
         text-decoration: none;
+        transition: var(--transition);
+        display: block;
+        margin-bottom: 8px;
+      }
+      .footer-link:hover {
+        color: var(--gold);
+        padding-left: 5px;
       }
       .footer-bottom {
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -549,13 +555,11 @@
       }
     </style>
   </head>
-  <body>
+  <body id="top">
     <nav>
-      <a class="logo" href="index.html" style="text-decoration: none"
-        >Pennine Care</a
-      >
+      <a class="logo" href="index.html">Pennine Care Center</a>
       <ul class="nav-links">
-        <li><a href="pennine-suite.html">Penine Suite</a></li>
+        <li><a href="pennine-suite.html">Pennine Suite</a></li>
         <li><a href="moorland-suite.html">Moorland Suite</a></li>
         <li><a href="life-at-pennine.html">Life at Pennine</a></li>
         <li><a href="team.html">Team</a></li>
@@ -566,15 +570,16 @@
     <header class="hero">
       <video
         id="heroVideo"
-        src="pine-care-1.mp4"
         class="hero-img"
         autoplay
         loop
         muted
         playsinline
         poster="hero.PNG"
-      ></video>
-      <div class="hero-overlay"></div>
+      >
+        <source src="pine-care-1.mp4" type="video/mp4" />
+        <source src="pine-care-1.webm" type="video/webm" />
+      </video>
       <div class="video-controls">
         <button class="mute-btn" id="audioToggle" title="Toggle Sound">
           <i class="fas fa-volume-mute"></i>
@@ -583,7 +588,7 @@
       <div class="hero-content">
         <p>Experience Excellence</p>
         <h1>Caring is What we do best</h1>
-        <a href="#contact" class="btn-gold">Book a Visit</a>
+        <a href="contact.html" class="btn-gold">Book a Visit</a>
       </div>
     </header>
 
@@ -602,19 +607,23 @@
             <img
               src="PennineSuite2.png"
               class="slider-img"
-              alt="Pennine Suite 3"
+              alt="Pennine Suite Interior"
             />
             <img
               src="PennineSuite.png"
               class="slider-img active"
-              alt="Pennine Suite 1"
+              alt="Pennine Suite View"
             />
             <img
               src="PennineSuite1.png"
               class="slider-img"
-              alt="Pennine Suite 2"
+              alt="Pennine Suite Lounge"
             />
-            <img src="hero.PNG" class="slider-img" alt="Pennine Suite 4" />
+            <img
+              src="hero.PNG"
+              class="slider-img"
+              alt="Pennine Suite Exterior"
+            />
             <div class="slider-nav">
               <button class="slider-arrow" id="penninePrev">
                 <i class="fas fa-chevron-left"></i>
@@ -645,22 +654,22 @@
             <img
               src="MoorlandSuite.png"
               class="slider-img"
-              alt="Pennine Suite 3"
+              alt="Moorland Unit Area"
             />
             <img
               src="MoorlandSuite1.png"
               class="slider-img active"
-              alt="Pennine Suite 1"
+              alt="Moorland Private Room"
             />
             <img
               src="MoorlandSuite2.png"
               class="slider-img"
-              alt="Pennine Suite 2"
+              alt="Moorland Garden View"
             />
             <img
               src="MoorlandSuite3.png"
               class="slider-img"
-              alt="Pennine Suite 4"
+              alt="Moorland Dining Area"
             />
             <div class="slider-nav">
               <button class="slider-arrow" id="moorlandPrev">
@@ -710,19 +719,19 @@
       <h2 style="color: var(--gold)">Life at Pennine Care Centre</h2>
       <div class="custom-grid">
         <div class="feature-card life-card">
-          <img src="6.PNG" />
+          <img src="6.PNG" alt="Life" />
           <h4>Life at Pennine</h4>
         </div>
         <div class="feature-card life-card">
-          <img src="5.PNG" />
+          <img src="5.PNG" alt="Care" />
           <h4>Person Centered Care</h4>
         </div>
         <div class="feature-card life-card">
-          <img src="7.JPEG" />
+          <img src="7.JPEG" alt="Activities" />
           <h4>Activities</h4>
         </div>
         <div class="feature-card life-card">
-          <img src="8.PNG" />
+          <img src="8.PNG" alt="Nutrition" />
           <h4>Nutrition and dining</h4>
         </div>
       </div>
@@ -789,7 +798,7 @@
       <img src="last-4.jpg" alt="Award 4" />
     </div>
 
-    <div id="contact" class="full-map-section">
+    <div id="location" class="full-map-section">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2374.346892556277!2d-1.954625223364239!3d53.46228396655512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bc78602b6677b%3A0xc33e0856019a7974!2sPennine%20Care%20Centre!5e0!3m2!1sen!2suk!4v1710000000000!5m2!1sen!2suk"
         loading="lazy"
@@ -804,14 +813,21 @@
         </div>
         <div class="footer-col">
           <h4>Navigation</h4>
-          <p><a href="#" class="footer-link">About Us</a></p>
+          <p><a href="index.html" class="footer-link">About Us</a></p>
           <p><a href="#suites" class="footer-link">Our Suites</a></p>
-          <p><a href="#care" class="footer-link">Care Services</a></p>
+          <p>
+            <a href="moorland-suite.html" class="footer-link">Care Services</a>
+          </p>
         </div>
         <div class="footer-col">
           <h4>Information</h4>
-          <p><a href="#" class="footer-link">Careers</a></p>
-          <p><a href="#" class="footer-link">Privacy Policy</a></p>
+          <p><a href="contact.html" class="footer-link">Careers</a></p>
+          <p><a href="contact.html" class="footer-link">Privacy Policy</a></p>
+          <p>
+            <a href="life-at-pennine.html" class="footer-link"
+              >Life at Pennine</a
+            >
+          </p>
         </div>
         <div class="footer-col">
           <h4>Get in Touch</h4>
@@ -833,36 +849,51 @@
             class="socials"
             style="margin-top: 25px; display: flex; gap: 15px"
           >
-            <a href="#" aria-label="Facebook"
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"
               ><i class="fab fa-facebook-f"></i
             ></a>
-            <a href="#" aria-label="Instagram"
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              aria-label="Instagram"
               ><i class="fab fa-instagram"></i
             ></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"
+              ><i class="fab fa-twitter"></i
+            ></a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy">
-          © Copyright 2026 Signature Care Homes | All Rights Reserved.
+          © Copyright 2026 Pennine Care Centre | All Rights Reserved.
         </div>
-        <a href="#" class="back-to-top"
-          >Back to top <i class="fas fa-arrow-up" style="margin-left: 5px"></i
-        ></a>
+        <a href="#top" class="back-to-top">
+          Back to top <i class="fas fa-arrow-up" style="margin-left: 5px"></i>
+        </a>
       </div>
     </footer>
 
     <a href="https://wa.me/441457862466" class="whatsapp-float" target="_blank">
       <i class="fab fa-whatsapp"></i>
     </a>
+
     <script>
       (function () {
+        // Audio Toggle Logic
+        const video = document.getElementById("heroVideo");
+        const audioBtn = document.getElementById("audioToggle");
+        if (audioBtn && video) {
+          audioBtn.addEventListener("click", () => {
+            video.muted = !video.muted;
+            audioBtn.innerHTML = video.muted
+              ? '<i class="fas fa-volume-mute"></i>'
+              : '<i class="fas fa-volume-up"></i>';
+          });
+        }
+
         /**
          * Reusable function to initialize a slider
-         * @param {string} sliderId - The ID of the slider container
-         * @param {string} prevId - The ID of the previous button
-         * @param {string} nextId - The ID of the next button
          */
         function initSlider(sliderId, prevId, nextId) {
           const container = document.getElementById(sliderId);
@@ -872,7 +903,6 @@
           const nextBtn = document.getElementById(nextId);
           const prevBtn = document.getElementById(prevId);
 
-          // Find the current index based on the "active" class in HTML
           let currentIndex = Array.from(images).findIndex((img) =>
             img.classList.contains("active"),
           );
@@ -915,7 +945,7 @@
           startTimer();
         }
 
-        // Initialize both sliders
+        // Initialize sliders
         initSlider("pennine-slider", "penninePrev", "pennineNext");
         initSlider("moorland-slider", "moorlandPrev", "moorlandNext");
       })();
