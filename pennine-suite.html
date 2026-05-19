@@ -12,6 +12,10 @@
       href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --gold: #c5a059;
@@ -19,6 +23,7 @@
         --cream: #faf9f6;
         --white: #ffffff;
         --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        --transition-slow: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         --font-primary: "Montserrat", sans-serif;
         --font-serif: "Playfair Display", serif;
         --whatsapp-green: #25d366;
@@ -34,7 +39,9 @@
         color: var(--navy);
         overflow-x: hidden;
         font-family: var(--font-primary);
-        line-height: 1.65;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        scroll-behavior: smooth;
       }
       h1,
       h2,
@@ -45,10 +52,10 @@
         font-weight: 600;
       }
 
-      /* Navigation */
+      /* NAVIGATION MOTION */
       nav {
-        background-color: rgba(0, 43, 91, 0.98);
-        padding: 0.5rem 5%;
+        background-color: rgba(0, 43, 91, 0.94);
+        padding: 1.2rem 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -56,7 +63,18 @@
         width: 100%;
         top: 0;
         z-index: 1000;
-        border-bottom: 2px solid var(--gold);
+        border-bottom: 4px solid var(--gold);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition:
+          padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      nav.scrolled {
+        padding: 0.6rem 5%;
+        background-color: rgba(0, 43, 91, 0.99);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
       }
       .logo {
         color: var(--white);
@@ -64,11 +82,17 @@
         letter-spacing: 4px;
         font-size: 1.6rem;
         text-decoration: none;
+        font-weight: 800;
+        transition: var(--transition);
+      }
+      .logo:hover {
+        color: var(--gold);
+        transform: scale(1.02);
       }
       .nav-links {
         list-style: none;
         display: flex;
-        gap: 20px;
+        gap: 25px;
       }
       .nav-links a {
         text-decoration: none;
@@ -76,125 +100,351 @@
         font-size: 0.9rem;
         text-transform: uppercase;
         transition: var(--transition);
+        font-weight: 500;
+        letter-spacing: 1px;
+        position: relative;
+        padding-bottom: 4px;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--gold);
+        transition: var(--transition);
+      }
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
+        width: 100%;
       }
       .nav-links a:hover,
       .nav-links a.active {
         color: var(--gold);
       }
 
-      /* Hero */
+      /* HERO ENTRANCE ANIMS */
       .hero-sub {
         height: 60vh;
         background:
-          linear-gradient(rgba(0, 43, 91, 0.7), rgba(0, 43, 91, 0.7)),
-          url("hero.PNG");
-        background-size: cover;
-        background-position: center;
+          linear-gradient(rgba(0, 43, 91, 0.75), rgba(0, 43, 91, 0.75)),
+          url("hero.PNG") center/cover no-repeat;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--white);
         text-align: center;
         margin-top: 60px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-content {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation-delay: 0.2s;
+      }
+      @keyframes heroReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .hero-content p {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--gold);
+        margin-bottom: 10px;
       }
       .hero-sub h1 {
-        font-size: clamp(2.5rem, 6vw, 4rem);
-        color: var(--gold);
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        color: var(--white);
+        line-height: 1.2;
       }
 
-      /* Intro Section */
-      .suite-intro {
+      /* INTERSECTION OBSERVER ENTRANCE REVEAL STYLE */
+      .reveal-element {
+        opacity: 0;
+        transform: translateY(50px);
+        transition:
+          opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, opacity;
+      }
+      .reveal-element.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Alternating container grid adjustments */
+      .alternating-container {
         padding: 100px 10%;
-        background: var(--white);
-        text-align: center;
-      }
-      .suite-intro h2 {
-        font-size: 2.8rem;
-        margin-bottom: 30px;
-        color: var(--navy);
-      }
-      .suite-intro p {
-        font-size: 1.15rem;
-        max-width: 900px;
-        margin: 0 auto 30px;
-        color: #444;
-      }
-      .gallery-section h2 {
-        font-size: 2.8rem;
-      }
-      /* Detail Flip Cards */
-      .details-section {
-        padding: 100px 5%;
         background: var(--cream);
       }
-      .details-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 40px;
-        max-width: 1200px;
-        margin: 0 auto;
+      .alternating-row {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        margin-bottom: 120px;
       }
-      .detail-card {
-        background: var(--navy);
-        color: var(--white);
-        padding: 50px 40px;
-        border-radius: 4px;
-        box-shadow: 10px 10px 0 var(--gold);
-        transition: var(--transition);
-        position: relative;
-      }
-      .detail-card:hover {
-        transform: translateY(-10px);
-      }
-      .detail-card i {
-        font-size: 2.5rem;
-        color: var(--gold);
-        margin-bottom: 25px;
-        display: block;
-      }
-      .detail-card h3 {
-        color: var(--gold);
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-      }
-      .detail-card .sub-detail {
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(197, 160, 89, 0.3);
-        font-size: 0.95rem;
-        font-style: italic;
-        color: #ddd;
+      .alternating-row:last-child {
+        margin-bottom: 0;
       }
 
-      /* Gallery */
+      /* ROW IMAGE SCALE MOTION */
+      .row-image {
+        flex: 1;
+        height: 480px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 20px 20px 0 var(--gold);
+        transition:
+          box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+      }
+      .row-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+        transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+      }
+      /* When active from observer, zoom out to normal perspective */
+      .reveal-element.active .row-image img {
+        transform: scale(1);
+      }
+      /* Hover interaction */
+      .row-image:hover {
+        transform: translateY(-5px);
+        box-shadow: 25px 25px 0 var(--gold);
+      }
+      .row-image:hover img {
+        transform: scale(1.05) !important;
+      }
+
+      .row-text {
+        flex: 1.2;
+      }
+      .row-text h2 {
+        font-size: 2.8rem;
+        color: var(--navy);
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 15px;
+      }
+      .row-text h2::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        background: var(--gold);
+        bottom: 0;
+        left: 0;
+        transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: 0.3s;
+      }
+      .reveal-element.active .row-text h2::after {
+        width: 60px;
+      }
+      .row-text p {
+        color: #444;
+        font-size: 1.05rem;
+        margin-bottom: 20px;
+      }
+      .row-text em {
+        display: block;
+        border-left: 3px solid var(--gold);
+        padding-left: 15px;
+        margin: 20px 0;
+        font-style: italic;
+        color: var(--navy);
+      }
+
+      /* Explicit desktop row-reversal to prevent preview-wrapper conflicts */
+      @media (min-width: 969px) {
+        .row-reverse-desktop {
+          flex-direction: row-reverse;
+        }
+        .row-reverse-desktop .row-image {
+          box-shadow: -20px 20px 0 var(--gold) !important;
+        }
+        .row-reverse-desktop .row-image:hover {
+          box-shadow: -25px 25px 0 var(--gold) !important;
+        }
+      }
+
+      /* BUTTON SHIMMER GLOW MOTION */
+      .btn-gold {
+        padding: 14px 35px;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-family: var(--font-primary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        transition: var(--transition);
+        display: inline-block;
+        background: transparent;
+        margin-top: 15px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .btn-gold::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(197, 160, 89, 0.25),
+          transparent
+        );
+        transition: 0.6s ease-in-out;
+        z-index: -1;
+      }
+      .btn-gold:hover {
+        background: var(--gold);
+        color: var(--navy);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.15);
+      }
+      .btn-gold:hover::before {
+        left: 100%;
+      }
+
+      /* SPECIAL WELLBEING HIGHLIGHT MOTION CARD */
+      .wellbeing-highlight {
+        background: var(--navy);
+        color: var(--white) !important;
+        padding: 50px;
+        border-radius: 4px;
+        box-shadow: 20px 20px 0 var(--gold);
+        transition: var(--transition);
+      }
+      .wellbeing-highlight h2 {
+        color: var(--gold) !important;
+      }
+      .wellbeing-highlight h2::after {
+        background: var(--white) !important;
+        width: 0;
+      }
+      .reveal-element.active .wellbeing-highlight h2::after {
+        width: 60px;
+      }
+      .wellbeing-highlight p {
+        color: #e5e7eb !important;
+      }
+      .coming-soon-badge {
+        display: inline-block;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 700;
+        padding: 5px 15px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        border-radius: 2px;
+        animation: pulseGlow 2s infinite ease-in-out;
+      }
+
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 rgba(197, 160, 89, 0);
+        }
+        50% {
+          transform: scale(1.02);
+          box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+        }
+      }
+
+      /* GALLERY IMAGES */
       .gallery-section {
         padding: 100px 5%;
         text-align: center;
         background: var(--white);
+        overflow: hidden;
+      }
+      .gallery-section h2 {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: var(--navy);
+      }
+      .gold-divider {
+        width: 0;
+        height: 3px;
+        background: var(--gold);
+        margin: 15px auto 40px;
+        transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal-element.active .gold-divider {
+        width: 80px;
       }
       .gallery-container {
         position: relative;
         overflow: hidden;
         max-width: 1400px;
-        margin: 40px auto;
+        margin: 0 auto;
       }
       .image-track {
         display: flex;
         gap: 20px;
-        transition: var(--transition);
+        transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
       }
       .gallery-item {
         flex: 0 0 calc(33.333% - 14px);
         min-width: 300px;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 4px;
+        position: relative;
+        transition: var(--transition);
       }
       .gallery-item img {
         width: 100%;
-        height: 400px;
+        height: 100%;
         object-fit: cover;
-        border-radius: 8px;
+        transition: var(--transition-slow);
+        filter: brightness(0.95);
+      }
+      .gallery-item:hover img {
+        transform: scale(1.08);
+        filter: brightness(1.05);
+      }
+      .gallery-item::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 43, 91, 0.4) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: var(--transition);
+        pointer-events: none;
+      }
+      .gallery-item:hover::after {
+        opacity: 1;
       }
 
-      /* Navigation Arrows */
       .slider-nav {
         position: absolute;
         top: 50%;
@@ -204,6 +454,7 @@
         transform: translateY(-50%);
         z-index: 10;
         pointer-events: none;
+        padding: 0 10px;
       }
       .slider-arrow {
         background: var(--gold);
@@ -217,9 +468,16 @@
         align-items: center;
         justify-content: center;
         font-size: 1.2rem;
+        transition: var(--transition);
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .slider-arrow:hover {
+        background: var(--navy);
+        color: var(--white);
+        transform: scale(1.1);
       }
 
-      /* Footer */
       footer {
         background: var(--navy);
         color: #fff;
@@ -243,12 +501,18 @@
         color: var(--gold);
         margin-bottom: 10px;
         font-family: var(--font-serif);
+        font-size: 1.1rem;
       }
       .footer-link {
         color: inherit;
         text-decoration: none;
         display: block;
         margin-bottom: 10px;
+        transition: var(--transition);
+      }
+      .footer-link:hover {
+        color: var(--gold);
+        transform: translateX(5px);
       }
       .footer-bottom {
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -258,6 +522,45 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
+        gap: 20px;
+      }
+      .footer-copy {
+        font-size: 0.75rem;
+        opacity: 0.5;
+      }
+      .back-to-top {
+        color: var(--gold);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .back-to-top:hover {
+        transform: translateY(-3px);
+        color: var(--white);
+      }
+
+      .socials a {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+      .socials a:hover {
+        background: var(--white);
+        color: var(--navy);
+        transform: translateY(-5px) rotate(360deg);
       }
 
       .whatsapp-float {
@@ -275,24 +578,57 @@
         font-size: 30px;
         z-index: 1001;
         text-decoration: none;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .whatsapp-float:hover {
+        transform: scale(1.15) translateY(-5px);
       }
 
       @media (max-width: 968px) {
-        .gallery-item {
-          flex: 0 0 100%;
+        nav {
+          padding: 1rem 5%;
+        }
+        .alternating-container {
+          padding: 60px 5%;
+        }
+        .alternating-row {
+          flex-direction: column !important;
+          gap: 40px;
+          margin-bottom: 80px;
+        }
+        .row-image {
+          width: 100%;
+          height: 320px;
+          box-shadow: 12px 12px 0 var(--gold) !important;
+        }
+        .row-image:hover {
+          box-shadow: 15px 15px 0 var(--gold) !important;
         }
         .nav-links {
           display: none;
         }
+        .gallery-item {
+          flex: 0 0 100%;
+        }
+        .whatsapp-float {
+          bottom: 20px;
+          right: 20px;
+          width: 50px;
+          height: 50px;
+          font-size: 25px;
+        }
       }
     </style>
   </head>
-  <body>
-    <nav>
+  <body id="top">
+    <nav id="mainNav">
       <a class="logo" href="index.html">Pennine Care Center</a>
       <ul class="nav-links">
-        <li><a href="pennine-suite.html" class="active">Penine Suite</a></li>
+        <li><a href="index.html">About Us</a></li>
+        <li><a href="pennine-suite.html" class="active">Pennine Suite</a></li>
         <li><a href="moorland-suite.html">Moorland Suite</a></li>
+        <li><a href="services.html">Service</a></li>
         <li><a href="life-at-pennine.html">Life at Pennine</a></li>
         <li><a href="team.html">Team</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -301,127 +637,323 @@
 
     <header class="hero-sub">
       <div class="hero-content">
-        <h1>The Pennine Suite</h1>
-        <p>Adapting and living with dignity</p>
+        <p>A Welcoming, Supportive Environment</p>
+        <h1>Pennine Suite</h1>
       </div>
     </header>
 
-    <section class="suite-intro">
-      <h2>Experience The Pennine Suite</h2>
-      <p>
-        The Pennine Suite is a mixed gender space that has 30 beautifully and
-        sensitively decorated bedrooms. Residents and their families have a
-        canvas on which to create a room that is individual to them, with ample
-        space for pictures and treasured mementos.
-      </p>
-      <p>
-        Bedrooms and day spaces boast scenic views of the stunning Peak
-        District. There are several larger rooms with ensuite bathrooms and
-        comfortable homely meeting rooms for quality time with loved ones.
-      </p>
-      <a
-        href="contact.html"
-        style="
-          padding: 14px 35px;
-          border: 1px solid var(--gold);
-          color: var(--gold);
-          text-decoration: none;
-          text-transform: uppercase;
-          font-weight: 700;
-          display: inline-block;
-        "
-        >Contact Us</a
-      >
-    </section>
-
-    <section class="details-section">
-      <div class="details-grid">
-        <div class="detail-card">
-          <i class="fas fa-users"></i>
-          <h3>Community</h3>
-          <p>
-            We recognise the importance of community. Our large lounge area
-            allows residents to socialise, engage in activities, or simply gaze
-            out of picture windows at the Peak District landscapes.
-          </p>
-          <div class="sub-detail">
-            <strong>The Detail:</strong> Spacious dining rooms create a friendly
-            atmosphere with clustered tables for communal eating experiences.
-          </div>
+    <main class="alternating-container">
+      <!-- Row 1: Image Left, Text Right on Desktop -->
+      <div class="alternating-row reveal-element">
+        <div class="row-image">
+          <img
+            src="PennineSuite.png"
+            alt="Nestling in the beautiful market town of Glossop"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Pennine+Suite+Exterior';
+            "
+          />
         </div>
-
-        <div class="detail-card">
-          <i class="fas fa-bed"></i>
-          <h3>Bedrooms</h3>
+        <div class="row-text">
+          <h2>An Introduction to Tasteful Modernity</h2>
           <p>
-            Spacious, well-appointed rooms that we encourage residents to
-            personalise. Many feature ensuite bathrooms and all offer
-            breathtaking views of the surrounding hills.
+            Nestling in the beautiful market town of Glossop, the Pennine Suite
+            has all the charm that one might expect of a place, whilst retaining
+            some of its original hand-crafted features, blends this with
+            tasteful modernity.
           </p>
-          <div class="sub-detail">
-            <strong>The Detail:</strong> Safety is paramount; each room includes
-            nurse call systems, sensor mats, and bespoke technological aids.
-          </div>
-        </div>
-
-        <div class="detail-card">
-          <i class="fas fa-leaf"></i>
-          <h3>Gardens</h3>
           <p>
-            Our lush gardens offer mature trees, shrubs, and flowers.
-            Well-placed seating allows residents to enjoy nature in a peaceful,
-            secure environment.
+            The Pennine Suite is a mixed gender space that has 30, beautifully
+            and sensitively decorated bedrooms, where residents and their
+            families have a canvas on which to create a room that is individual
+            to them; with ample space for pictures and treasured mementos.
           </p>
-          <div class="sub-detail">
-            <strong>The Detail:</strong> During summer, we host organised
-            outdoor activities to maximize the benefits of fresh air and social
-            interaction.
-          </div>
+          <p>
+            Bedrooms and day spaces boasts of scenic views of the stunning peak
+            district and there are several larger rooms, with some ensuite
+            bathrooms. There are a number of comfortable and homely meeting
+            rooms where families, friends and those involved in the care of our
+            residents can sit, talk and spend precious quality time together.
+          </p>
+          <p>
+            For those of our residents who enjoy spending time outside, we have
+            a spacious mature gardens which offer the opportunity to embrace the
+            extensive range of flowers, shrubs and trees, or to sit and admire
+            these gardens with impressive, rolling hills as a backdrop.
+          </p>
+          <a href="contact.html" class="btn-gold">Schedule a Visit</a>
         </div>
       </div>
-    </section>
 
-    <section class="gallery-section">
-      <h2>Gallery</h2>
+      <!-- Row 2: Text Left, Image Right on Desktop (Using explicit utility class) -->
+      <div class="alternating-row row-reverse-desktop reveal-element">
+        <div class="row-image">
+          <img
+            src="PennineSuite1.png"
+            alt="Homely Lounge Environment"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Community+Lounge';
+            "
+          />
+        </div>
+        <div class="row-text">
+          <h2>Our Warm & Caring Community</h2>
+          <p>
+            We recognise the importance of community and as such, we have a
+            large lounge area where our residents can spend time together,
+            socialise, engage with the range of activities that happen there, or
+            simply gaze out of the picture windows onto green fields where
+            horses, livestock and birds can be seen.
+          </p>
+          <p>
+            The spacious dining rooms are set out to create a warm and friendly
+            dining atmosphere. Tables are decorated with tablecloths and
+            clustered to allow for communal eating experiences, which can also
+            be personalised to meet the individual needs of residents.
+          </p>
+          <p>
+            We also provide a hydration station that encourages residents to
+            drink whenever they wish and an opportunity to enjoy a variety of
+            snacks. To ensure that our residents are supported in these communal
+            spaces, there is a nursing station where trained staff are ready to
+            assist should the need arise.
+          </p>
+          <p>
+            In addition to this, there are also quiet lounges where our
+            residents can enjoy a smaller space which is both peaceful and
+            private.
+          </p>
+          <em
+            >Lifts are built within the Pennine Suite, making all areas and
+            lounges comfortably accessible.</em
+          >
+        </div>
+      </div>
+
+      <!-- Row 3: Image Left, Text Right on Desktop -->
+      <div class="alternating-row reveal-element">
+        <div class="row-image">
+          <img
+            src="PennineSuite2.png"
+            alt="Comfortable Spacious Bedrooms"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Comfortable+Bedrooms';
+            "
+          />
+        </div>
+        <div class="row-text">
+          <h2>Private, Well-Appointed Bedrooms</h2>
+          <p>
+            Our well-appointed bedrooms are spacious and offer an opportunity to
+            personalise them. We encourage our residents and their loved ones to
+            furnish and decorate their room to their taste.
+          </p>
+          <p>
+            Some of the bedrooms have ensuite bathrooms and all have views of
+            the Peak District.
+          </p>
+          <p>
+            As the safety of our residents is of paramount importance, each room
+            has a range of technological support which include, nurse call
+            systems, sensor mats and other aids as individually required to meet
+            the individual safety needs of residents.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 4: Text Left, Image Right on Desktop (Using explicit utility class) -->
+      <div class="alternating-row row-reverse-desktop reveal-element">
+        <div class="row-image">
+          <img
+            src="PennineSuite3.png"
+            alt="Stunning Scenic Garden Landscapes"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Beautiful+Gardens';
+            "
+          />
+        </div>
+        <div class="row-text">
+          <h2>Tranquil Gardens & Outdoors</h2>
+          <p>
+            With well placed seating, our residents can, should they wish, spend
+            time in the very pleasant surroundings made up of mature trees,
+            shrubs, and flowers.
+          </p>
+          <p>
+            Throughout the Summer, there are organised activities in the gardens
+            which lend themselves well to the benefits of fresh air, socialising
+            with others, combined with the breathtaking views of the Peak
+            District.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 5: Image Left, Text Right on Desktop -->
+      <div class="alternating-row reveal-element">
+        <div class="row-image" style="box-shadow: 20px 20px 0 var(--navy)">
+          <img
+            src="11.png"
+            alt="Wellbeing Modernization Plans"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/c5a059/002b5b?text=Wellbeing+Space+Coming+Soon';
+            "
+          />
+        </div>
+        <div class="row-text wellbeing-highlight">
+          <span class="coming-soon-badge">Watch the Space</span>
+          <h2>Coming Soon Wellbeing Space</h2>
+          <p>
+            As part of our modernisation plans for 2024, we are currently
+            building a wellbeing space. Our wellbeing space will offer a range
+            of in-house activities that include chiropody, hairdressing, and
+            nail bar for manicures.
+          </p>
+          <p>
+            Here, residents can receive pamper sessions which we envisage will
+            greatly increase their sense of wellbeing, peace of mind, and
+            relaxation.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <section class="gallery-section reveal-element">
+      <h2>Suite Gallery</h2>
+      <div class="gold-divider"></div>
+
       <div class="gallery-container">
         <div class="slider-nav">
-          <button class="slider-arrow" id="galleryPrev">
+          <button
+            class="slider-arrow"
+            id="galleryPrev"
+            aria-label="Previous image"
+          >
             <i class="fas fa-chevron-left"></i>
           </button>
-          <button class="slider-arrow" id="galleryNext">
+          <button class="slider-arrow" id="galleryNext" aria-label="Next image">
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
         <div id="image-track" class="image-track">
           <div class="gallery-item">
-            <img src="PennineSuite.png" alt="Pennine Suite" />
+            <img
+              src="PennineSuite.png"
+              alt="Suite Lounge View"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+1';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="PennineSuite1.png" alt="Interior" />
+            <img
+              src="PennineSuite1.png"
+              alt="Dining Room Detail"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+2';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="PennineSuite2.png" alt="Bedroom" />
+            <img
+              src="PennineSuite2.png"
+              alt="Bedroom Setup"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+3';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="PennineSuite3.png" alt="Lounge" />
+            <img
+              src="PennineSuite3.png"
+              alt="Garden Seating"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+4';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="11.png" alt="Pennine Suite" />
+            <img
+              src="11.png"
+              alt="Living Spaces"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+5';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="12.png" alt="Pennine Suite" />
+            <img
+              src="12.png"
+              alt="Lounge Area View"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+6';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="13.png" alt="Pennine Suite" />
+            <img
+              src="13.png"
+              alt="Cozy Dining Area"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+7';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="14.png" alt="Pennine Suite" />
+            <img
+              src="14.png"
+              alt="Comfort Lounge"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+8';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="15.png" alt="Pennine Suite" />
+            <img
+              src="15.png"
+              alt="Breathtaking Hills View"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+9';
+              "
+            />
           </div>
           <div class="gallery-item">
-            <img src="16.png" alt="Pennine Suite" />
+            <img
+              src="16.png"
+              alt="Outdoor Pathways"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://placehold.co/500x400/002b5b/ffffff?text=Gallery+10';
+              "
+            />
           </div>
         </div>
       </div>
@@ -436,8 +968,16 @@
         <div class="footer-col">
           <h4>Navigation</h4>
           <a href="index.html" class="footer-link">About Us</a>
-          <a href="pennine-suite.html" class="footer-link">Penine Suite</a>
+          <a href="pennine-suite.html" class="footer-link">Pennine Suite</a>
           <a href="moorland-suite.html" class="footer-link">Moorland Suite</a>
+          <a href="life-at-pennine.html" class="footer-link">Life at Pennine</a>
+          <a href="team.html" class="footer-link">Team</a>
+        </div>
+        <div class="footer-col">
+          <h4>Information</h4>
+          <a href="contact.html" class="footer-link">Careers</a>
+          <a href="contact.html" class="footer-link">Privacy Policy</a>
+          <a href="contact.html" class="footer-link">Book a Visit</a>
         </div>
         <div class="footer-col">
           <h4>Get in Touch</h4>
@@ -455,39 +995,124 @@
             ></i>
             Admin@nyms-services.com
           </p>
+          <div
+            class="socials"
+            style="margin-top: 25px; display: flex; gap: 15px"
+          >
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy">
-          © Copyright 2026 Signature Care Homes | All Rights Reserved.
+          © Copyright 2026 Pennine Care Centre | All Rights Reserved.
         </div>
-        <a href="#" class="back-to-top"
-          >Back to top <i class="fas fa-arrow-up"></i
-        ></a>
+        <a href="#top" class="back-to-top">
+          Back to top <i class="fas fa-arrow-up" style="margin-left: 5px"></i>
+        </a>
       </div>
     </footer>
 
-    <a href="https://wa.me/441457862466" class="whatsapp-float" target="_blank"
-      ><i class="fab fa-whatsapp"></i
-    ></a>
+    <!-- Floating WhatsApp CTA -->
+    <a href="https://wa.me/441457862466" class="whatsapp-float" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
-      const track = document.getElementById("image-track");
-      const nextBtn = document.getElementById("galleryNext");
-      const prevBtn = document.getElementById("galleryPrev");
-      let currentSlide = 0;
+      (function () {
+        // --- INTERSECTION OBSERVER (REVEAL MOTION ON SCROLL) ---
+        const revealElements = document.querySelectorAll(".reveal-element");
 
-      function jumpToSlide(index) {
-        const items = document.querySelectorAll(".gallery-item");
-        const itemsPerView = window.innerWidth > 968 ? 3 : 1;
-        const maxSlides = Math.ceil(items.length / itemsPerView);
-        currentSlide = (index + maxSlides) % maxSlides;
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-      }
+        const revealCallback = (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              // Once revealed, we don't need to observe it anymore
+              observer.unobserve(entry.target);
+            }
+          });
+        };
 
-      nextBtn.addEventListener("click", () => jumpToSlide(currentSlide + 1));
-      prevBtn.addEventListener("click", () => jumpToSlide(currentSlide - 1));
-      setInterval(() => jumpToSlide(currentSlide + 1), 5000);
+        const revealObserver = new IntersectionObserver(revealCallback, {
+          root: null,
+          threshold: 0.15,
+          rootMargin: "0px 0px -50px 0px",
+        });
+
+        revealElements.forEach((el) => revealObserver.observe(el));
+
+        // --- NAVIGATION SCROLL MOTION ---
+        const nav = document.getElementById("mainNav");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            nav.classList.add("scrolled");
+          } else {
+            nav.classList.remove("scrolled");
+          }
+        });
+
+        // --- GALLERY SLIDER CONTROL ---
+        const track = document.getElementById("image-track");
+        const nextBtn = document.getElementById("galleryNext");
+        const prevBtn = document.getElementById("galleryPrev");
+        let currentSlide = 0;
+        let slideInterval;
+
+        function getItemsPerView() {
+          return window.innerWidth > 968 ? 3 : 1;
+        }
+
+        function jumpToSlide(index) {
+          const items = document.querySelectorAll(".gallery-item");
+          const itemsPerView = getItemsPerView();
+          const maxSlides = Math.ceil(items.length / itemsPerView);
+
+          currentSlide = (index + maxSlides) % maxSlides;
+
+          const translatePercentage = currentSlide * 100;
+          track.style.transform = `translateX(-${translatePercentage}%)`;
+        }
+
+        function startAutoplay() {
+          slideInterval = setInterval(() => {
+            jumpToSlide(currentSlide + 1);
+          }, 6000);
+        }
+
+        function resetAutoplay() {
+          clearInterval(slideInterval);
+          startAutoplay();
+        }
+
+        if (nextBtn && prevBtn && track) {
+          nextBtn.addEventListener("click", () => {
+            jumpToSlide(currentSlide + 1);
+            resetAutoplay();
+          });
+
+          prevBtn.addEventListener("click", () => {
+            jumpToSlide(currentSlide - 1);
+            resetAutoplay();
+          });
+
+          window.addEventListener("resize", () => {
+            jumpToSlide(currentSlide);
+          });
+
+          startAutoplay();
+        }
+      })();
     </script>
   </body>
 </html>

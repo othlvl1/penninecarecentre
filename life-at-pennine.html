@@ -9,7 +9,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -20,6 +24,7 @@
         --cream: #faf9f6;
         --white: #ffffff;
         --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        --transition-slow: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         --font-primary: "Montserrat", sans-serif;
         --font-serif: "Playfair Display", serif;
         --whatsapp-green: #25d366;
@@ -36,7 +41,9 @@
         color: var(--navy);
         overflow-x: hidden;
         font-family: var(--font-primary);
-        line-height: 1.65;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        scroll-behavior: smooth;
       }
 
       h1,
@@ -48,9 +55,10 @@
         font-weight: 600;
       }
 
+      /* NAVIGATION DESIGN & SCROLL MOTION */
       nav {
-        background-color: rgba(0, 43, 91, 0.98);
-        padding: 0.5rem 5%;
+        background-color: rgba(0, 43, 91, 0.94);
+        padding: 1.2rem 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -58,7 +66,18 @@
         width: 100%;
         top: 0;
         z-index: 1000;
-        border-bottom: 2px solid var(--gold);
+        border-bottom: 4px solid var(--gold);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition:
+          padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      nav.scrolled {
+        padding: 0.6rem 5%;
+        background-color: rgba(0, 43, 91, 0.99);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
       }
 
       .logo {
@@ -67,12 +86,18 @@
         letter-spacing: 4px;
         font-size: 1.6rem;
         text-decoration: none;
+        font-weight: 800;
+        transition: var(--transition);
+      }
+      .logo:hover {
+        color: var(--gold);
+        transform: scale(1.02);
       }
 
       .nav-links {
         list-style: none;
         display: flex;
-        gap: 20px;
+        gap: 25px;
       }
 
       .nav-links a {
@@ -81,136 +106,281 @@
         font-size: 0.9rem;
         text-transform: uppercase;
         transition: var(--transition);
+        font-weight: 500;
+        letter-spacing: 1px;
+        position: relative;
+        padding-bottom: 4px;
       }
-
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--gold);
+        transition: var(--transition);
+      }
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
+        width: 100%;
+      }
       .nav-links a:hover,
       .nav-links a.active {
         color: var(--gold);
       }
 
+      /* HERO ENTRANCE EFFECTS */
       .hero-sub {
         height: 60vh;
         background:
-          linear-gradient(rgba(0, 43, 91, 0.6), rgba(0, 43, 91, 0.6)),
-          url("life-at-pennine.png");
-        background-size: cover;
-        background-position: center;
+          linear-gradient(rgba(0, 43, 91, 0.65), rgba(0, 43, 91, 0.65)),
+          url("life-at-pennine.png") center/cover no-repeat;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--white);
         text-align: center;
         margin-top: 60px;
+        position: relative;
+        overflow: hidden;
       }
 
       .hero-content {
         max-width: 800px;
         padding: 0 20px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation-delay: 0.2s;
+        will-change: transform, opacity;
+      }
+      @keyframes heroReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .hero-sub h1 {
         font-size: clamp(2.5rem, 6vw, 4.5rem);
         color: var(--gold);
         margin-bottom: 20px;
+        line-height: 1.2;
       }
 
       .hero-sub p {
         font-size: 1.2rem;
         font-weight: 300;
         letter-spacing: 1px;
+        opacity: 0.95;
       }
 
-      .section-padding {
+      /* HIGH-END SCROLL MOTION HOOKS */
+      .reveal-element {
+        opacity: 0;
+        transform: translateY(50px);
+        transition:
+          opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, opacity;
+      }
+      .reveal-element.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* PREMIUM ALTERNATING ROWS */
+      .alternating-container {
         padding: 100px 10%;
+        background: var(--cream);
+      }
+      .alternating-row {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        margin-bottom: 120px;
+      }
+      .alternating-row:last-child {
+        margin-bottom: 0;
       }
 
-      .centered-header {
-        text-align: center;
-        max-width: 900px;
-        margin: 0 auto 60px;
+      .row-image {
+        flex: 1;
+        height: 480px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 20px 20px 0 var(--gold);
+        transition:
+          box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+      }
+      .row-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.15);
+        transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+      }
+      .reveal-element.active .row-image img {
+        transform: scale(1);
+      }
+      .row-image:hover {
+        transform: translateY(-5px);
+        box-shadow: 25px 25px 0 var(--gold);
+      }
+      .row-image:hover img {
+        transform: scale(1.05) !important;
       }
 
-      .centered-header h2 {
-        font-size: 3rem;
+      .row-text {
+        flex: 1.2;
+      }
+      .row-text h2 {
+        font-size: 2.8rem;
+        color: var(--navy);
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 15px;
+      }
+      .row-text h2::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        background: var(--gold);
+        bottom: 0;
+        left: 0;
+        transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: 0.3s;
+      }
+      .reveal-element.active .row-text h2::after {
+        width: 60px;
+      }
+      .row-text p {
+        color: #444;
+        font-size: 1.05rem;
         margin-bottom: 20px;
+      }
+      .row-text em {
+        display: block;
+        border-left: 3px solid var(--gold);
+        padding-left: 15px;
+        margin: 20px 0;
+        font-style: italic;
         color: var(--navy);
       }
 
-      .gold-divider {
-        width: 80px;
-        height: 3px;
-        background: var(--gold);
-        margin: 20px auto;
+      /* Explicit desktop row-reversal overrides */
+      @media (min-width: 969px) {
+        .row-reverse-desktop {
+          flex-direction: row-reverse;
+        }
+        .row-reverse-desktop .row-image {
+          box-shadow: -20px 20px 0 var(--gold) !important;
+        }
+        .row-reverse-desktop .row-image:hover {
+          box-shadow: -25px 25px 0 var(--gold) !important;
+        }
       }
 
-      .grid-2col {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-      }
-
-      .grid-3col {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-      }
-
-      .value-card {
-        background: var(--white);
-        padding: 40px;
-        border-radius: 4px;
-        border: 1px solid #eee;
-        transition: var(--transition);
-        box-shadow: 10px 10px 0 var(--navy);
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
-
-      .value-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 10px 10px 0 var(--gold);
-      }
-
-      /* Fixed Card Style for Dark Backgrounds */
-      .value-card-2 {
-        background: var(--white);
-        padding: 45px;
-        border-radius: 4px;
-        border: 2px solid var(--gold); /* Added Golden Border */
-        color: var(
-          --navy
-        ); /* Fixed visibility: set text to navy on white card */
-        transition: var(--transition);
-        box-shadow: 10px 10px 0 var(--white);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .value-card-2:hover {
-        transform: translateY(-10px);
-        box-shadow: 10px 10px 0 var(--gold);
-      }
-
-      .value-card h3,
-      .value-card-2 h3 {
+      /* GOLD SHIMMERING BUTTONS */
+      .btn-gold {
+        padding: 14px 35px;
+        border: 1px solid var(--gold);
         color: var(--gold);
-        font-size: 1.8rem;
-        margin-bottom: 15px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-family: var(--font-primary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        transition: var(--transition);
+        display: inline-block;
+        background: transparent;
+        margin-top: 15px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .btn-gold::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(197, 160, 89, 0.25),
+          transparent
+        );
+        transition: 0.6s ease-in-out;
+        z-index: -1;
+      }
+      .btn-gold:hover {
+        background: var(--gold);
+        color: var(--navy);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.15);
+      }
+      .btn-gold:hover::before {
+        left: 100%;
+      }
+
+      /* SPECIAL WELLBEING HIGHLIGHT CARD */
+      .wellbeing-highlight {
+        background: var(--navy);
+        color: var(--white) !important;
+        padding: 50px;
+        border-radius: 4px;
+        box-shadow: 20px 20px 0 var(--gold);
+        transition: var(--transition);
+      }
+      .wellbeing-highlight h2 {
+        color: var(--gold) !important;
+      }
+      .wellbeing-highlight h2::after {
+        background: var(--white) !important;
+        width: 0;
+      }
+      .reveal-element.active .wellbeing-highlight h2::after {
+        width: 60px;
+      }
+      .wellbeing-highlight p {
+        color: #e5e7eb !important;
+      }
+      .coming-soon-badge {
+        display: inline-block;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 700;
+        padding: 5px 15px;
+        font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 2px;
+        margin-bottom: 15px;
+        border-radius: 2px;
+        animation: pulseGlow 2s infinite ease-in-out;
       }
 
-      .bg-navy {
-        background-color: var(--navy);
-        color: var(--white);
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 rgba(197, 160, 89, 0);
+        }
+        50% {
+          transform: scale(1.02);
+          box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+        }
       }
 
-      .bg-navy .centered-header h2 {
-        color: var(--gold);
-      }
-
+      /* FOOTER */
       footer {
         background: var(--navy);
         color: #fff;
@@ -243,11 +413,64 @@
       .footer-link {
         color: inherit;
         text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
         transition: var(--transition);
       }
-
       .footer-link:hover {
         color: var(--gold);
+        transform: translateX(5px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 60px;
+        padding-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .footer-copy {
+        font-size: 0.75rem;
+        opacity: 0.5;
+      }
+
+      .back-to-top {
+        color: var(--gold);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .back-to-top:hover {
+        transform: translateY(-3px);
+        color: var(--white);
+      }
+
+      .socials a {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+      .socials a:hover {
+        background: var(--white);
+        color: var(--navy);
+        transform: translateY(-5px) rotate(360deg);
       }
 
       .whatsapp-float {
@@ -265,29 +488,54 @@
         font-size: 30px;
         z-index: 1001;
         text-decoration: none;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .whatsapp-float:hover {
+        transform: scale(1.15) translateY(-5px);
       }
 
       @media (max-width: 968px) {
-        .grid-2col,
-        .grid-3col {
-          grid-template-columns: 1fr;
+        nav {
+          padding: 1rem 5%;
         }
-        .section-padding {
+        .alternating-container {
           padding: 60px 5%;
+        }
+        .alternating-row {
+          flex-direction: column !important;
+          gap: 40px;
+          margin-bottom: 80px;
+        }
+        .row-image {
+          width: 100%;
+          height: 320px;
+          box-shadow: 12px 12px 0 var(--gold) !important;
+        }
+        .row-image:hover {
+          box-shadow: 15px 15px 0 var(--gold) !important;
         }
         .nav-links {
           display: none;
         }
+        .whatsapp-float {
+          bottom: 20px;
+          right: 20px;
+          width: 50px;
+          height: 50px;
+          font-size: 25px;
+        }
       }
     </style>
   </head>
-  <body>
-    <nav>
+  <body id="top">
+    <nav id="mainNav">
       <a class="logo" href="index.html">Pennine Care Center</a>
       <ul class="nav-links">
-        <li><a href="pennine-suite.html">Penine Suite</a></li>
+        <li><a href="index.html">About Us</a></li>
+        <li><a href="pennine-suite.html">Pennine Suite</a></li>
         <li><a href="moorland-suite.html">Moorland Suite</a></li>
+        <li><a href="services.html">Service</a></li>
         <li>
           <a href="life-at-pennine.html" class="active">Life at Pennine</a>
         </li>
@@ -306,102 +554,200 @@
       </div>
     </header>
 
-    <section class="section-padding">
-      <div class="centered-header">
-        <h2>Person Centred Care</h2>
-        <div class="gold-divider"></div>
-        <p>
-          We believe that every resident is an individual. From the moment we
-          meet, we build a trusting, supportive relationship to ensure unique
-          preferences remain at the heart of everything we do.
-        </p>
+    <main class="alternating-container">
+      <!-- Row 1: Image Left, Text Right on Desktop (Inhouse Activities) -->
+      <div class="alternating-row reveal-element">
+        <div class="row-image">
+          <img
+            src="21.png"
+            alt="Inhouse Activities"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Inhouse+Activities';
+            "
+          />
+        </div>
+        <div class="row-text">
+          <h2>Inhouse Activities</h2>
+          <p>
+            Our dedicated activity team coproduce with residents, and deliver a
+            range of activities to nourish body, mind and soul. We incorporate
+            music, movement, art, pet therapy, sensory play, intergenerational
+            play, outings, mental exercises, games and more to create a diverse
+            offering encouraging activity and socialisation.
+          </p>
+          <p>
+            Overseen by the Wellbeing and Services Manager the team supports
+            each individual to maintain a full and enriching life.
+          </p>
+          <a href="contact.html" class="btn-gold">Join an Activity</a>
+        </div>
       </div>
 
-      <div class="grid-2col">
-        <div class="value-card">
-          <h3>Best Services</h3>
+      <!-- Row 2: Text Left, Image Right on Desktop (Community Engagement) -->
+      <div class="alternating-row row-reverse-desktop reveal-element">
+        <div class="row-image">
+          <img
+            src="22.png"
+            alt="Community Engagement"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Community+Engagement';
+            "
+          />
+        </div>
+        <div class="row-text">
+          <h2>Community Engagement</h2>
           <p>
-            Understanding unique and individual preferences ensures that
-            residents remain in the center of all that we do. We strive to
-            provide a safe, sound, and supportive relationship from day one.
+            Having a sense of community and belonging is so important to our
+            resident’s wellbeing and enjoying life to the full. Here at Pennine
+            we offer a range of community focussed activities throughout the
+            week.
+          </p>
+          <p>
+            These community led events include worship services, live
+            entertainment, intergenerational play and pet therapy. We encourage
+            our residents to stay connected to the local community, with both
+            group outings and one-to-one trips to enjoy the local amenities.
+            These activities are led by our Activities coordinator and overseen
+            by the Wellbeing and Services Manager.
           </p>
         </div>
-        <div class="value-card">
-          <h3>Giving Importance</h3>
-          <p>
-            From choice of décor to meal options, we engage with residents and
-            loved ones to ensure voices are heard and acted upon. We actively
-            welcome feedback to continuously improve our bespoke care.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding bg-navy">
-      <div class="centered-header">
-        <h2>Family & Community</h2>
-        <div class="gold-divider"></div>
-        <p style="opacity: 0.9; color: white">
-          We actively encourage families to be involved in the life of their
-          loved ones. Transparency and open communication are the cornerstones
-          of our community.
-        </p>
-      </div>
-
-      <div class="grid-3col">
-        <div class="value-card-2">
-          <h3>Newsletter</h3>
-          <p>
-            A regular, informative newsletter helps families gain deep insight
-            into the vibrant happenings and updates at Pennine.
-          </p>
-        </div>
-        <div class="value-card-2">
-          <h3>Private Page</h3>
-          <p>
-            Our dedicated private Facebook group allows families to see regular
-            updates and images of their loved ones' daily journey.
-          </p>
-        </div>
-        <div class="value-card-2">
-          <h3>Family Meetings</h3>
-          <p>
-            Regular meetings led by our Wellbeing Manager ensure that family
-            opinions shape the ongoing development of care plans.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding">
-      <div class="centered-header">
-        <h2>Innovative Care</h2>
-        <div class="gold-divider"></div>
-        <p>
-          We combine cutting-edge assistive technology with essential human
-          compassion.
-        </p>
       </div>
 
-      <div class="grid-2col">
-        <div class="value-card">
-          <h3>Assistive Tech</h3>
-          <p>
-            Reviewing and building on our use of technology enables us to deploy
-            systems like nurse calls and sensor mats in a less intrusive but
-            highly effective way.
-          </p>
+      <!-- Row 3: Image Left, Text Right on Desktop (Nutrition & Hydration) -->
+      <div class="alternating-row reveal-element">
+        <div class="row-image">
+          <img
+            src="23.png"
+            alt="Nutrition & Hydration"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Nutrition+and+Dining';
+            "
+          />
         </div>
-        <div class="value-card">
-          <h3>Safety & Support</h3>
+        <div class="row-text">
+          <h2>Nutrition & Hydration</h2>
           <p>
-            Technology in no way replaces the human aspect of our work, but it
-            increases the level of detection and support for the safety of our
-            residents.
+            Creating a balanced healthy and nutritious menu is important to us
+            but we also provide meals that meet individual tastes and
+            preferences. Ensuring that our residents eat meals that they enjoy
+            is all part of providing a person-centred approach in all that we
+            do, and this includes making sure that dietary requirements are met
+            and that the food is wholesome, healthy and flavoursome.
+          </p>
+          <p>
+            There are snacks for those moments when the residents are peckish
+            and a large range of drinks to encourage hydration. The Kitchen is
+            staffed with a dedicated team who are well trained in catering for
+            our residents.
           </p>
         </div>
       </div>
-    </section>
+
+      <!-- Row 4: Text Left, Image Right on Desktop (Person Centred Care) -->
+      <div class="alternating-row row-reverse-desktop reveal-element">
+        <div class="row-image">
+          <img
+            src="24.png"
+            alt="Person Centred Care"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Person+Centred+Care';
+            "
+          />
+        </div>
+        <div class="row-text">
+          <h2>Person Centred Care</h2>
+          <p>
+            All staff at Pennine are trained in person centred care. We believe
+            that the residents are individuals and should be treated as such.
+            From the moment we meet each resident we take every opportunity to
+            build a trusting safe, sound, and supportive relationship with them.
+            In doing so, we are able to understand their unique and individual
+            preferences and ensure that they remain in the centre of all that we
+            do with and for them.
+          </p>
+          <p>
+            From choice of décor to meal choices we engage with our residents
+            and where possible their loved ones to ensure that their options are
+            explored, and their voices heard and acted upon. As part of our
+            commitment to Person Centred care, we welcome feedback from our
+            residents, their loved ones and those who are involved in their
+            care.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 5: Image Left, Text Right on Desktop (Family) -->
+      <div class="alternating-row reveal-element">
+        <div class="row-image">
+          <img
+            src="25.png"
+            alt="Family Connection"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Family+Connection';
+            "
+          />
+        </div>
+        <div class="row-text">
+          <h2>Family Partnerships</h2>
+          <p>
+            We actively encourage families to be involved in the life of their
+            loved one. Here at Pennine, the Care Manager calls the family of the
+            residents on a monthly basis to gain their views and opinions on the
+            development of the plans around their care. There is a very
+            informative newsletter that is produced regularly that help families
+            to gain an insight into what is happening at Pennine.
+          </p>
+          <p>
+            Using Facebook, we have a private page that is dedicated to the
+            families who give consent, where we post great images and updates on
+            a regular basis to keep families updated on their loved ones journey
+            at Pennine. There are regular family meetings led by the Wellbeing
+            and Services Manager.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 6: Text Left, Image Right on Desktop (Innovative Care) -->
+      <div class="alternating-row row-reverse-desktop reveal-element">
+        <div class="row-image">
+          <img
+            src="26.png"
+            alt="Innovative Care Tech"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Innovative+Care+Technology';
+            "
+          />
+        </div>
+        <div class="row-text">
+          <h2>Innovative Care</h2>
+          <p>
+            The use of assistive technology has grown over time. This in no way
+            replaces the human aspect of our work but enables us to deploy a
+            range of technology to increase the level of detection and support
+            in a less intrusive but useful way. We use nurse call systems,
+            sensor mats and other technology as part of our person-centred care
+            approach to meet the individual care and safety needs of residents.
+          </p>
+          <p>
+            We are continuously reviewing our use of technology and are building
+            on our programme of introducing cutting edge technology to provide
+            the best level of care possible.
+          </p>
+        </div>
+      </div>
+    </main>
 
     <footer>
       <div class="footer-grid">
@@ -411,18 +757,15 @@
         </div>
         <div class="footer-col">
           <h4>Navigation</h4>
-          <p><a href="index.html" class="footer-link">About Us</a></p>
-          <p><a href="pennine-suite.html" class="footer-link">Our Suites</a></p>
-          <p>
-            <a href="life-at-pennine.html" class="footer-link"
-              >Life at Pennine</a
-            >
-          </p>
+          <a href="index.html" class="footer-link">About Us</a>
+          <a href="index.html#suites" class="footer-link">Our Suites</a>
+          <a href="moorland-suite.html" class="footer-link">Care Services</a>
         </div>
         <div class="footer-col">
           <h4>Information</h4>
-          <p><a href="#" class="footer-link">Careers</a></p>
-          <p><a href="#" class="footer-link">Privacy Policy</a></p>
+          <a href="contact.html" class="footer-link">Careers</a>
+          <a href="contact.html" class="footer-link">Privacy Policy</a>
+          <a href="life-at-pennine.html" class="footer-link">Life at Pennine</a>
         </div>
         <div class="footer-col">
           <h4>Get in Touch</h4>
@@ -440,23 +783,72 @@
             ></i>
             Admin@nyms-services.com
           </p>
+          <div
+            class="socials"
+            style="margin-top: 25px; display: flex; gap: 15px"
+          >
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
         </div>
       </div>
-      <div
-        style="
-          margin-top: 60px;
-          padding-top: 30px;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-          font-size: 0.8rem;
-          opacity: 0.6;
-        "
-      >
-        © Copyright 2026 Pennine Care Centre | All Rights Reserved.
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © Copyright 2026 Pennine Care Centre | All Rights Reserved.
+        </div>
+        <a href="#top" class="back-to-top">
+          Back to top <i class="fas fa-arrow-up" style="margin-left: 5px"></i>
+        </a>
       </div>
     </footer>
 
+    <!-- Floating WhatsApp CTA -->
     <a href="https://wa.me/441457862466" class="whatsapp-float" target="_blank">
       <i class="fab fa-whatsapp"></i>
     </a>
+
+    <script>
+      (function () {
+        // --- INTERSECTION OBSERVER (REVEAL MOTION ON SCROLL) ---
+        const revealElements = document.querySelectorAll(".reveal-element");
+
+        const revealCallback = (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, {
+          root: null,
+          threshold: 0.15,
+          rootMargin: "0px 0px -50px 0px",
+        });
+
+        revealElements.forEach((el) => revealObserver.observe(el));
+
+        // --- NAVIGATION SCROLL MOTION ---
+        const nav = document.getElementById("mainNav");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) {
+            nav.classList.add("scrolled");
+          } else {
+            nav.classList.remove("scrolled");
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
