@@ -4,16 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pennine Suite | Pennine Care Centre</title>
+    <!-- Font Awesome Icon Kit -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <!-- Premium Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -42,6 +44,7 @@
         line-height: 1.7;
         -webkit-font-smoothing: antialiased;
         scroll-behavior: smooth;
+        font-size: 16px;
       }
       h1,
       h2,
@@ -52,7 +55,7 @@
         font-weight: 600;
       }
 
-      /* NAVIGATION MOTION */
+      /* DYNAMIC HEADER MOTION */
       nav {
         background-color: rgba(0, 43, 91, 0.94);
         padding: 1.2rem 5%;
@@ -93,6 +96,7 @@
         list-style: none;
         display: flex;
         gap: 25px;
+        align-items: center;
       }
       .nav-links a {
         text-decoration: none;
@@ -124,7 +128,86 @@
         color: var(--gold);
       }
 
-      /* HERO ENTRANCE ANIMS */
+      /* MOBILE MENU HAMBURGER BUTTON */
+      .mobile-nav-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        z-index: 1100;
+      }
+      .mobile-nav-toggle .bar {
+        height: 3px;
+        width: 100%;
+        background-color: var(--white);
+        border-radius: 2px;
+        transition: var(--transition);
+      }
+
+      /* MOBILE OVERLAY NAVIGATION SYSTEM */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 43, 91, 0.99);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 1050;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mobile-menu-overlay.open {
+        right: 0;
+      }
+      .close-menu-btn {
+        position: absolute;
+        top: 30px;
+        right: 5%;
+        font-size: 3rem;
+        color: var(--white);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        line-height: 1;
+      }
+      .close-menu-btn:hover {
+        color: var(--gold);
+      }
+      .mobile-nav-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+      }
+      .mobile-nav-links a {
+        text-decoration: none;
+        color: var(--white);
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 2px;
+        font-family: var(--font-serif);
+        transition: var(--transition);
+        display: inline-block;
+      }
+      .mobile-nav-links a:hover,
+      .mobile-nav-links a.active {
+        color: var(--gold);
+        transform: scale(1.05);
+      }
+
+      /* HERO SCENE SUB */
       .hero-sub {
         height: 60vh;
         background:
@@ -159,12 +242,12 @@
         margin-bottom: 10px;
       }
       .hero-sub h1 {
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-size: clamp(2.2rem, 6vw, 4.2rem);
         color: var(--white);
-        line-height: 1.2;
+        line-height: 1.25;
       }
 
-      /* INTERSECTION OBSERVER ENTRANCE REVEAL STYLE */
+      /* SCROLL REVEAL TRIGGERS */
       .reveal-element {
         opacity: 0;
         transform: translateY(50px);
@@ -178,7 +261,7 @@
         transform: translateY(0);
       }
 
-      /* Alternating container grid adjustments */
+      /* Alternating container grid */
       .alternating-container {
         padding: 100px 10%;
         background: var(--cream);
@@ -193,7 +276,7 @@
         margin-bottom: 0;
       }
 
-      /* ROW IMAGE SCALE MOTION */
+      /* Image Scales & Zooms */
       .row-image {
         flex: 1;
         height: 480px;
@@ -214,17 +297,36 @@
         transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
         will-change: transform;
       }
-      /* When active from observer, zoom out to normal perspective */
       .reveal-element.active .row-image img {
         transform: scale(1);
       }
-      /* Hover interaction */
       .row-image:hover {
         transform: translateY(-5px);
         box-shadow: 25px 25px 0 var(--gold);
       }
       .row-image:hover img {
         transform: scale(1.05) !important;
+      }
+
+      /* Inline Image Slider Support for Alternate Rows */
+      .row-image .slider-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transform: scale(1.15);
+        transition:
+          opacity 1s ease-in-out,
+          transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+        object-fit: cover;
+        will-change: transform, opacity;
+      }
+      .row-image .slider-img.active {
+        opacity: 1;
+        position: relative;
+        transform: scale(1);
       }
 
       .row-text {
@@ -265,7 +367,6 @@
         color: var(--navy);
       }
 
-      /* Explicit desktop row-reversal to prevent preview-wrapper conflicts */
       @media (min-width: 969px) {
         .row-reverse-desktop {
           flex-direction: row-reverse;
@@ -278,7 +379,7 @@
         }
       }
 
-      /* BUTTON SHIMMER GLOW MOTION */
+      /* GOLD BUTTONS WITH SHIMMER */
       .btn-gold {
         padding: 14px 35px;
         border: 1px solid var(--gold);
@@ -323,7 +424,7 @@
         left: 100%;
       }
 
-      /* SPECIAL WELLBEING HIGHLIGHT MOTION CARD */
+      /* WELLBEING CARDS */
       .wellbeing-highlight {
         background: var(--navy);
         color: var(--white) !important;
@@ -371,7 +472,7 @@
         }
       }
 
-      /* GALLERY IMAGES */
+      /* SUITE PHOTO GALLERY */
       .gallery-section {
         padding: 100px 5%;
         text-align: center;
@@ -478,6 +579,7 @@
         transform: scale(1.1);
       }
 
+      /* CORE FOOTER BLOCK */
       footer {
         background: var(--navy);
         color: #fff;
@@ -585,9 +687,16 @@
         transform: scale(1.15) translateY(-5px);
       }
 
+      /* STABLE RESPONSIVE OVERRIDES */
       @media (max-width: 968px) {
         nav {
           padding: 1rem 5%;
+        }
+        .nav-links {
+          display: none; /* Hide standard nav on mobile */
+        }
+        .mobile-nav-toggle {
+          display: flex; /* Activate responsive trigger */
         }
         .alternating-container {
           padding: 60px 5%;
@@ -605,9 +714,6 @@
         .row-image:hover {
           box-shadow: 15px 15px 0 var(--gold) !important;
         }
-        .nav-links {
-          display: none;
-        }
         .gallery-item {
           flex: 0 0 100%;
         }
@@ -618,23 +724,59 @@
           height: 50px;
           font-size: 25px;
         }
+        .footer-grid {
+          gap: 30px;
+        }
       }
     </style>
   </head>
   <body id="top">
+    <!-- Responsive Header / Navigation -->
     <nav id="mainNav">
       <a class="logo" href="index.html">Pennine Care Center</a>
+      <!-- Desktop Navigation Menu -->
       <ul class="nav-links">
         <li><a href="index.html">About Us</a></li>
         <li><a href="pennine-suite.html" class="active">Pennine Suite</a></li>
         <li><a href="moorland-suite.html">Moorland Suite</a></li>
-        <li><a href="services.html">Service</a></li>
+        <li><a href="services.html">Services</a></li>
         <li><a href="life-at-pennine.html">Life at Pennine</a></li>
-        <li><a href="team.html">Team</a></li>
+        <li><a href="team.html">Our Team</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <!-- Hamburger Menu Button -->
+      <button
+        class="mobile-nav-toggle"
+        id="mobileNavToggle"
+        aria-label="Open Navigation Menu"
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </nav>
 
+    <!-- Slide-in Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+      <button
+        class="close-menu-btn"
+        id="closeMenuBtn"
+        aria-label="Close Navigation Menu"
+      >
+        &times;
+      </button>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html">About Us</a></li>
+        <li><a href="pennine-suite.html" class="active">Pennine Suite</a></li>
+        <li><a href="moorland-suite.html">Moorland Suite</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="life-at-pennine.html">Life at Pennine</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="contact.html">Contact Menu</a></li>
+      </ul>
+    </div>
+
+    <!-- Banner Content Header -->
     <header class="hero-sub">
       <div class="hero-content">
         <p>A Welcoming, Supportive Environment</p>
@@ -642,12 +784,14 @@
       </div>
     </header>
 
+    <!-- Main Alternating Layout Presentation -->
     <main class="alternating-container">
-      <!-- Row 1: Image Left, Text Right on Desktop -->
+      <!-- Row 1: Image Left (Slider Gallery), Text Right on Desktop -->
       <div class="alternating-row reveal-element">
-        <div class="row-image">
+        <div class="row-image" id="intro-slider">
           <img
-            src="PennineSuite.png"
+            src="An Introduction to Tasteful Modernity.PNG"
+            class="slider-img active"
             alt="Nestling in the beautiful market town of Glossop"
             onerror="
               this.onerror = null;
@@ -655,7 +799,48 @@
                 'https://placehold.co/800x600/002b5b/ffffff?text=Pennine+Suite+Exterior';
             "
           />
+          
+          <img
+            src="pennine care 6.PNG"
+            class="slider-img"
+            alt="Pennine Suite Exterior Drone View"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Pennine+Care+Aerial';
+            "
+          />
+          <img
+            src="pennice drone 2.PNG"
+            class="slider-img"
+            alt="Pennine Suite Landscape Panorama"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Panorama+View';
+            "
+          />
+          <!-- Inline Slide Navigation Arrows -->
+          <div class="slider-nav" style="padding: 0 15px;">
+            <button
+              class="slider-arrow"
+              id="introPrev"
+              aria-label="Previous Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-left" style="font-size: 0.95rem;"></i>
+            </button>
+            <button
+              class="slider-arrow"
+              id="introNext"
+              aria-label="Next Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-right" style="font-size: 0.95rem;"></i>
+            </button>
+          </div>
         </div>
+		
         <div class="row-text">
           <h2>An Introduction to Tasteful Modernity</h2>
           <p>
@@ -687,18 +872,78 @@
         </div>
       </div>
 
-      <!-- Row 2: Text Left, Image Right on Desktop (Using explicit utility class) -->
+      <!-- Row 2: Text Left, Image Right (Slider Gallery) on Desktop -->
       <div class="alternating-row row-reverse-desktop reveal-element">
-        <div class="row-image">
+        <div class="row-image" id="community-slider">
           <img
-            src="PennineSuite1.png"
-            alt="Homely Lounge Environment"
+            src="14.png"
+            class="slider-img active"
+            alt="Warm and Communal Lounge Environment"
             onerror="
               this.onerror = null;
               this.src =
                 'https://placehold.co/800x600/002b5b/ffffff?text=Community+Lounge';
             "
           />
+          <img
+            src="PennineSuite.png"
+            class="slider-img"
+            alt="Lounge Area View"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Lounge+Area+View';
+            "
+          />
+          <img
+            src="27.png"
+            class="slider-img"
+            alt="Cozy Dining Area"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Cozy+Dining+Area';
+            "
+          />
+          <img
+            src="IMG_4942.JPG.jpeg"
+            class="slider-img"
+            alt="Comfort Lounge"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Comfort+Lounge';
+            "
+          />
+		  <img
+            src="15.png"
+            class="slider-img"
+            alt="Comfort Lounge"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Comfort+Lounge';
+            "
+          />
+          <!-- Inline Slide Navigation Arrows -->
+          <div class="slider-nav" style="padding: 0 15px;">
+            <button
+              class="slider-arrow"
+              id="communityPrev"
+              aria-label="Previous Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-left" style="font-size: 0.95rem;"></i>
+            </button>
+            <button
+              class="slider-arrow"
+              id="communityNext"
+              aria-label="Next Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-right" style="font-size: 0.95rem;"></i>
+            </button>
+          </div>
         </div>
         <div class="row-text">
           <h2>Our Warm & Caring Community</h2>
@@ -734,18 +979,60 @@
         </div>
       </div>
 
-      <!-- Row 3: Image Left, Text Right on Desktop -->
+      <!-- Row 3: Image Left (Slider Gallery), Text Right on Desktop -->
       <div class="alternating-row reveal-element">
-        <div class="row-image">
+        <div class="row-image" id="bedrooms-slider">
           <img
-            src="PennineSuite2.png"
-            alt="Comfortable Spacious Bedrooms"
+            src="11.png"
+            class="slider-img active"
+            alt="Comfortable, Private and Spacious Bedrooms"
             onerror="
               this.onerror = null;
               this.src =
                 'https://placehold.co/800x600/002b5b/ffffff?text=Comfortable+Bedrooms';
             "
           />
+		   <img
+            src="12.png"
+            class="slider-img"
+            alt="Moorland Suite Bedroom View"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Bedroom+View';
+            "
+          />
+          <img
+            src="17.png"
+            class="slider-img"
+            alt="Living Spaces"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Living+Spaces';
+            "
+          />
+         
+          
+          <!-- Inline Slide Navigation Arrows -->
+          <div class="slider-nav" style="padding: 0 15px;">
+            <button
+              class="slider-arrow"
+              id="bedroomsPrev"
+              aria-label="Previous Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-left" style="font-size: 0.95rem;"></i>
+            </button>
+            <button
+              class="slider-arrow"
+              id="bedroomsNext"
+              aria-label="Next Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-right" style="font-size: 0.95rem;"></i>
+            </button>
+          </div>
         </div>
         <div class="row-text">
           <h2>Private, Well-Appointed Bedrooms</h2>
@@ -767,11 +1054,12 @@
         </div>
       </div>
 
-      <!-- Row 4: Text Left, Image Right on Desktop (Using explicit utility class) -->
+      <!-- Row 4: Text Left, Image Right (Slider Gallery) on Desktop -->
       <div class="alternating-row row-reverse-desktop reveal-element">
-        <div class="row-image">
+        <div class="row-image" id="gardens-slider">
           <img
-            src="PennineSuite3.png"
+            src="PennineSuite2.png"
+            class="slider-img active"
             alt="Stunning Scenic Garden Landscapes"
             onerror="
               this.onerror = null;
@@ -779,6 +1067,46 @@
                 'https://placehold.co/800x600/002b5b/ffffff?text=Beautiful+Gardens';
             "
           />
+          <img
+            src="Tranquil Gardens & Outdoors 1.PNG"
+            class="slider-img"
+            alt="Breathtaking Hills View"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Breathtaking+Hills+View';
+            "
+          />
+          <img
+            src="quality-care.PNG"
+            class="slider-img"
+            alt="Outdoor Pathways"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Outdoor+Pathways';
+            "
+          />
+          
+          <!-- Inline Slide Navigation Arrows -->
+          <div class="slider-nav" style="padding: 0 15px;">
+            <button
+              class="slider-arrow"
+              id="gardensPrev"
+              aria-label="Previous Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-left" style="font-size: 0.95rem;"></i>
+            </button>
+            <button
+              class="slider-arrow"
+              id="gardensNext"
+              aria-label="Next Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-right" style="font-size: 0.95rem;"></i>
+            </button>
+          </div>
         </div>
         <div class="row-text">
           <h2>Tranquil Gardens & Outdoors</h2>
@@ -796,12 +1124,12 @@
         </div>
       </div>
 
-      <!-- Row 5: Image Left, Text Right on Desktop -->
+      <!-- Row 5: Wellbeing Modernization Area Block -->
       <div class="alternating-row reveal-element">
         <div class="row-image" style="box-shadow: 20px 20px 0 var(--navy)">
           <img
             src="11.png"
-            alt="Wellbeing Modernization Plans"
+            alt="Wellbeing Center Modernization Area"
             onerror="
               this.onerror = null;
               this.src =
@@ -827,6 +1155,7 @@
       </div>
     </main>
 
+    <!-- Shared Image Slider Gallery Section -->
     <section class="gallery-section reveal-element">
       <h2>Suite Gallery</h2>
       <div class="gold-divider"></div>
@@ -959,6 +1288,7 @@
       </div>
     </section>
 
+    <!-- Standard Core Footer -->
     <footer>
       <div class="footer-grid">
         <div class="footer-col">
@@ -975,8 +1305,8 @@
         </div>
         <div class="footer-col">
           <h4>Information</h4>
-          <a href="contact.html" class="footer-link">Careers</a>
-          <a href="contact.html" class="footer-link">Privacy Policy</a>
+          <a href="careers.html" class="footer-link">Careers</a>
+          <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
           <a href="contact.html" class="footer-link">Book a Visit</a>
         </div>
         <div class="footer-col">
@@ -1024,21 +1354,51 @@
       </div>
     </footer>
 
-    <!-- Floating WhatsApp CTA -->
-    <a href="https://wa.me/441457862466" class="whatsapp-float" target="_blank">
+    <!-- Floating Interactive WhatsApp CTA -->
+    <a
+      href="https://wa.me/441457862466"
+      class="whatsapp-float"
+      target="_blank"
+      aria-label="Chat on WhatsApp"
+    >
       <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
       (function () {
-        // --- INTERSECTION OBSERVER (REVEAL MOTION ON SCROLL) ---
+        // --- MOBILE NAVIGATION SYSTEM (INTERACTION ENGAGED) ---
+        const mobileToggle = document.getElementById("mobileNavToggle");
+        const mobileOverlay = document.getElementById("mobileMenuOverlay");
+        const closeBtn = document.getElementById("closeMenuBtn");
+
+        if (mobileToggle && mobileOverlay) {
+          const openMenu = () => {
+            mobileOverlay.classList.add("open");
+            document.body.style.overflow = "hidden"; // Retain layout focus
+          };
+
+          const closeMenu = () => {
+            mobileOverlay.classList.remove("open");
+            document.body.style.overflow = ""; // Reactivate scroll
+          };
+
+          mobileToggle.addEventListener("click", openMenu);
+          if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+
+          // Close navigation panel automatically upon route choice
+          const overlayLinks = mobileOverlay.querySelectorAll("a");
+          overlayLinks.forEach((link) => {
+            link.addEventListener("click", closeMenu);
+          });
+        }
+
+        // --- INTERSECTION OBSERVER ENGINE (SCROLL REVEALS) ---
         const revealElements = document.querySelectorAll(".reveal-element");
 
         const revealCallback = (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("active");
-              // Once revealed, we don't need to observe it anymore
               observer.unobserve(entry.target);
             }
           });
@@ -1052,7 +1412,7 @@
 
         revealElements.forEach((el) => revealObserver.observe(el));
 
-        // --- NAVIGATION SCROLL MOTION ---
+        // --- STICKY NAV DYNAMIC SCROLL TRANSITION ---
         const nav = document.getElementById("mainNav");
         window.addEventListener("scroll", () => {
           if (window.scrollY > 50) {
@@ -1062,6 +1422,63 @@
           }
         });
 
+        // --- INLINE ROW SLIDER CONTROL ---
+        function initRowSlider(sliderId, prevId, nextId) {
+          const container = document.getElementById(sliderId);
+          if (!container) return;
+
+          const images = container.querySelectorAll(".slider-img");
+          const nextBtn = document.getElementById(nextId);
+          const prevBtn = document.getElementById(prevId);
+
+          let currentIndex = Array.from(images).findIndex((img) =>
+            img.classList.contains("active"),
+          );
+          if (currentIndex === -1) currentIndex = 0;
+
+          let slideInterval;
+
+          function showSlide(index) {
+            images[currentIndex].classList.remove("active");
+            currentIndex = (index + images.length) % images.length;
+            images[currentIndex].classList.add("active");
+          }
+
+          function startTimer() {
+            slideInterval = setInterval(
+              () => showSlide(currentIndex + 1),
+              5500,
+            );
+          }
+
+          function resetTimer() {
+            clearInterval(slideInterval);
+            startTimer();
+          }
+
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              showSlide(currentIndex + 1);
+              resetTimer();
+            });
+          }
+
+          if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+              showSlide(currentIndex - 1);
+              resetTimer();
+            });
+          }
+
+          startTimer();
+        }
+
+        // Initialize sliders for all content rows
+        initRowSlider("intro-slider", "introPrev", "introNext");
+        initRowSlider("community-slider", "communityPrev", "communityNext");
+        initRowSlider("bedrooms-slider", "bedroomsPrev", "bedroomsNext");
+        initRowSlider("gardens-slider", "gardensPrev", "gardensNext");
+
         // --- GALLERY SLIDER CONTROL ---
         const track = document.getElementById("image-track");
         const nextBtn = document.getElementById("galleryNext");
@@ -1069,6 +1486,7 @@
         let currentSlide = 0;
         let slideInterval;
 
+        // Dynamic viewport helper
         function getItemsPerView() {
           return window.innerWidth > 968 ? 3 : 1;
         }

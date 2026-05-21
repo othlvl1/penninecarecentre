@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pennine Care Centre | Caring is What We Do Best</title>
+    <!-- Font Awesome Icon Kit -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <!-- Premium Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap"
       rel="stylesheet"
@@ -95,6 +97,7 @@
         list-style: none;
         display: flex;
         gap: 25px;
+        align-items: center;
       }
       .nav-links a {
         text-decoration: none;
@@ -126,9 +129,87 @@
         color: var(--gold);
       }
 
+      /* MOBILE MENU HAMBURGER BUTTON */
+      .mobile-nav-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        z-index: 1100;
+      }
+      .mobile-nav-toggle .bar {
+        height: 3px;
+        width: 100%;
+        background-color: var(--white);
+        border-radius: 2px;
+        transition: var(--transition);
+      }
+
+      /* MOBILE OVERLAY NAVIGATION SYSTEM */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 43, 91, 0.99);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 1050;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mobile-menu-overlay.open {
+        right: 0;
+      }
+      .close-menu-btn {
+        position: absolute;
+        top: 30px;
+        right: 5%;
+        font-size: 3rem;
+        color: var(--white);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        line-height: 1;
+      }
+      .close-menu-btn:hover {
+        color: var(--gold);
+      }
+      .mobile-nav-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+      }
+      .mobile-nav-links a {
+        text-decoration: none;
+        color: var(--white);
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 2px;
+        font-family: var(--font-serif);
+        transition: var(--transition);
+        display: inline-block;
+      }
+      .mobile-nav-links a:hover,
+      .mobile-nav-links a.active {
+        color: var(--gold);
+        transform: scale(1.05);
+      }
+
       /* HERO SCENE & INTRO REVEALS */
       .hero {
-        position: relative;
         height: 85vh;
         display: flex;
         align-items: center;
@@ -153,11 +234,11 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
+        /* background: linear-gradient(
           0deg,
           rgba(0, 43, 91, 0.85) 0%,
           rgba(0, 43, 91, 0.3) 100%
-        );
+        ); */
         z-index: -1;
       }
       .video-controls {
@@ -207,12 +288,12 @@
         margin-bottom: 10px;
       }
       .hero h1 {
-        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-size: clamp(2.2rem, 7vw, 4.2rem);
         margin-bottom: 25px;
-        line-height: 1.2;
+        line-height: 1.25;
       }
 
-      /* HIGH-END SCROLL MOTION HOOKS */
+      /* SCROLL REVEAL TRIGGERS */
       .reveal-fade-up {
         opacity: 0;
         transform: translateY(50px);
@@ -239,7 +320,7 @@
         transform: scale(1) translateY(0);
       }
 
-      /* STAGGERED GRID ENTRANCE */
+      /* STAGGERED ENTRANCES */
       .stagger-container .reveal-child {
         opacity: 0;
         transform: translateY(30px);
@@ -252,7 +333,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-      /* Iterative stagger delay rules up to 4 elements */
       .stagger-container.active .reveal-child:nth-child(1) {
         transition-delay: 0.1s;
       }
@@ -287,7 +367,7 @@
         width: 80px;
       }
 
-      /* Image Slider Parallax and Micro-Scale Motion */
+      /* Suite Preview Sliders */
       .suite-img {
         position: relative;
         flex: 0 0 60%;
@@ -316,7 +396,6 @@
         position: relative;
         transform: scale(1);
       }
-      /* Hover scale zoom on active image */
       .suite-img:hover .slider-img.active {
         transform: scale(1.05);
       }
@@ -355,7 +434,7 @@
       .intro-box {
         background: var(--navy);
         color: var(--white);
-        padding: 40px 10%;
+        padding: 50px 10%;
         text-align: center;
         border-bottom: 4px solid var(--gold);
       }
@@ -402,8 +481,6 @@
         margin-right: -10%;
         box-shadow: -20px 20px 0 var(--gold);
       }
-
-      /* Smooth Parallax card elevations on hover */
       .suite-item:hover .suite-content {
         transform: translateY(-5px);
         box-shadow: 25px 25px 0 var(--gold);
@@ -442,7 +519,7 @@
         margin: 0 auto;
       }
 
-      /* HOVER ZOOMS ON FEATURE CARDS */
+      /* FEATURE CARDS */
       .feature-card {
         background: var(--white);
         position: relative;
@@ -486,24 +563,120 @@
         color: var(--gold);
       }
 
-      .testimonial-card {
-        padding: 45px;
-        text-align: left;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+      /* BESPOKE HIGH-END CAROUSEL TESTIMONIALS SYSTEM */
+      .testimonials-section {
+        padding: 120px 5%;
+        background: var(--cream);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border-top: 1px solid rgba(0, 43, 91, 0.05);
+        border-bottom: 1px solid rgba(0, 43, 91, 0.05);
+      }
+      .section-subtitle {
+        font-family: var(--font-primary);
+        text-transform: uppercase;
+        color: var(--gold);
+        letter-spacing: 3px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+      .testimonials-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .testimonials-slider {
+        margin-top: 40px;
+        position: relative;
+      }
+      .testimonial-track-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+      }
+      .testimonial-track {
+        display: flex;
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+      }
+      .testimonial-slide {
+        flex: 0 0 100%;
+        width: 100%;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        opacity: 0.3;
+        transform: scale(0.95);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .testimonial-slide.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .testimonial-quote-icon {
+        font-size: 2.5rem;
+        color: var(--gold);
+        opacity: 0.25;
+        margin-bottom: 15px;
+      }
+      .testimonial-rating {
+        color: var(--gold);
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
       }
       .testimonial-text {
+        font-family: var(--font-serif);
+        font-size: clamp(1.2rem, 3vw, 1.6rem);
         font-style: italic;
-        margin-bottom: 25px;
-        color: #444;
-        font-size: 1.05rem;
+        color: var(--navy);
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto 25px;
+      }
+      .testimonial-divider {
+        width: 50px;
+        height: 2px;
+        background-color: var(--gold);
+        margin: 0 auto 20px;
       }
       .testimonial-author {
-        color: var(--gold);
+        font-family: var(--font-primary);
         font-size: 0.85rem;
         letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--navy);
+        display: block;
+      }
+      .author-relation {
+        font-weight: 400;
+        opacity: 0.7;
+      }
+      .testimonial-dots {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 40px;
+      }
+      .testimonial-dots .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        cursor: pointer;
+        background-color: transparent;
+        transition: var(--transition);
+      }
+      .testimonial-dots .dot.active {
+        background-color: var(--gold);
+        transform: scale(1.2);
       }
 
-      /* SHIMMER MOTION GOLD BUTTONS */
+      /* GOLD BUTTONS WITH SHIMMER */
       .btn-gold {
         padding: 14px 35px;
         border: 1px solid var(--gold);
@@ -759,9 +932,16 @@
         box-shadow: -20px 20px 0 var(--gold);
       }
 
+      /* HIGHLY REFINED RESPONSIVE STYLING */
       @media (max-width: 968px) {
         nav {
           padding: 1rem 5%;
+        }
+        .nav-links {
+          display: none; /* Hide main links on tablet/mobile */
+        }
+        .mobile-nav-toggle {
+          display: flex; /* Show hamburger button */
         }
         .suite-item,
         .suite-item:nth-child(even),
@@ -775,9 +955,6 @@
         .slider-nav {
           width: 100% !important;
           margin: 0 !important;
-        }
-        .nav-links {
-          display: none;
         }
         .whatsapp-float {
           bottom: 20px;
@@ -796,23 +973,66 @@
         .peace-img img {
           box-shadow: 12px 12px 0 var(--gold) !important;
         }
+        .peace-btn-group {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .awards-strip {
+          gap: 40px;
+        }
+        .footer-grid {
+          gap: 30px;
+        }
       }
     </style>
   </head>
   <body id="top">
+    <!-- Responsive Header / Navigation -->
     <nav id="mainNav">
       <a class="logo" href="index.html">Pennine Care Center</a>
+      <!-- Desktop Navigation Menu -->
       <ul class="nav-links">
         <li><a href="index.html" class="active">About Us</a></li>
         <li><a href="pennine-suite.html">Pennine Suite</a></li>
         <li><a href="moorland-suite.html">Moorland Suite</a></li>
-        <li><a href="services.html">Service</a></li>
+        <li><a href="services.html">Services</a></li>
         <li><a href="life-at-pennine.html">Life at Pennine</a></li>
-        <li><a href="team.html">Team</a></li>
+        <li><a href="team.html">Our Team</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <!-- Hamburger Menu Button -->
+      <button
+        class="mobile-nav-toggle"
+        id="mobileNavToggle"
+        aria-label="Open Navigation Menu"
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </nav>
 
+    <!-- Slide-in Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+      <button
+        class="close-menu-btn"
+        id="closeMenuBtn"
+        aria-label="Close Navigation Menu"
+      >
+        &times;
+      </button>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="active">About Us</a></li>
+        <li><a href="pennine-suite.html">Pennine Suite</a></li>
+        <li><a href="moorland-suite.html">Moorland Suite</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="life-at-pennine.html">Life at Pennine</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="contact.html">Contact Menu</a></li>
+      </ul>
+    </div>
+
+    <!-- Hero Showcase Section -->
     <header class="hero">
       <video
         id="heroVideo"
@@ -826,6 +1046,7 @@
         <source src="pine-care-1.mp4" type="video/mp4" />
         <source src="pine-care-1.webm" type="video/webm" />
       </video>
+      <div class="hero-overlay"></div>
       <div class="video-controls">
         <button class="mute-btn" id="audioToggle" title="Toggle Sound">
           <i class="fas fa-volume-mute"></i>
@@ -833,36 +1054,36 @@
       </div>
       <div class="hero-content">
         <p>Experience Excellence</p>
-        <h1>Caring is What We Do Best</h1>
+        <h1>Caring is what we do best</h1>
         <a href="contact.html" class="btn-gold">Book a Visit</a>
       </div>
     </header>
 
+    <!-- General Introduction Banner -->
     <section class="intro-box reveal-fade-up">
       <p>
-        Situated in the picturesque Peak district countryside on the outskirts
-        of Glossop, Pennine Care Centre provides person-centred care in a warm
-        and welcoming environment.
+        Pennine Care centre specialises in providing personalised residential;
+        consisting of Pennine Suite and Moorland Suite (male only)
       </p>
     </section>
 
-    <!-- Section: Suite Previews with Sliders -->
+    <!-- Section: Pennine Suite Preview -->
     <section id="suites" class="suite-section">
       <div class="suite-wrapper">
         <div class="suite-item reveal-scale-in">
           <div class="suite-img" id="pennine-slider">
             <img
-              src="PennineSuite2.png"
+			  src="pennine care 6.PNG"
               class="slider-img"
               alt="Pennine Suite Exterior"
             />
             <img
-              src="PennineSuite.png"
+              src="pennice drone 2.PNG"
               class="slider-img active"
               alt="Pennine Suite Interior"
             />
             <img
-              src="PennineSuite1.png"
+              src="PennineSuite2.png"
               class="slider-img"
               alt="Pennine Suite Lounge"
             />
@@ -908,12 +1129,12 @@
         <div class="suite-item reveal-scale-in">
           <div class="suite-img moorland-slider" id="moorland-slider">
             <img
-              src="MoorlandSuite.png"
+              src="pennine entrance.PNG"
               class="slider-img"
               alt="Moorland Suite Bedroom View"
             />
             <img
-              src="MoorlandSuite1.png"
+              src="Community Spaces 1.png"
               class="slider-img active"
               alt="Moorland Suite Lounge Area"
             />
@@ -964,7 +1185,7 @@
         <div class="feature-card reveal-child">
           <img
             src="1.PNG"
-            alt="Dementia Care"
+            alt="Dementia Care Specialist Support"
             onerror="
               this.onerror = null;
               this.src =
@@ -976,7 +1197,7 @@
         <div class="feature-card reveal-child">
           <img
             src="2.PNG"
-            alt="Male Unit"
+            alt="Dedicated Male Only Care Unit"
             onerror="
               this.onerror = null;
               this.src =
@@ -988,7 +1209,7 @@
         <div class="feature-card reveal-child">
           <img
             src="3.PNG"
-            alt="Community"
+            alt="Younger People Care Community"
             onerror="
               this.onerror = null;
               this.src =
@@ -1000,7 +1221,7 @@
         <div class="feature-card reveal-child">
           <img
             src="4.PNG"
-            alt="Needs"
+            alt="Comprehensive Emotional and Physical Care"
             onerror="
               this.onerror = null;
               this.src =
@@ -1024,8 +1245,8 @@
       <div class="custom-grid stagger-container">
         <div class="feature-card life-card reveal-child">
           <img
-            src="6.PNG"
-            alt="Life at Pennine"
+            src="Copilot_20260520_092720.png"
+            alt="Life at Pennine Care Centre"
             onerror="
               this.onerror = null;
               this.src =
@@ -1036,8 +1257,8 @@
         </div>
         <div class="feature-card life-card reveal-child">
           <img
-            src="5.PNG"
-            alt="Person Centered Care"
+            src="ChatGPT Image May 20, 2026, 06_48_21 PM.png"
+            alt="Person Centered Care Framework"
             onerror="
               this.onerror = null;
               this.src =
@@ -1048,8 +1269,8 @@
         </div>
         <div class="feature-card life-card reveal-child">
           <img
-            src="7.JPEG"
-            alt="Activities Setup"
+            src="66.png"
+            alt="Recreational Activities Setup"
             onerror="
               this.onerror = null;
               this.src =
@@ -1061,7 +1282,7 @@
         <div class="feature-card life-card reveal-child">
           <img
             src="8.PNG"
-            alt="Nutrition and Dining"
+            alt="Nutrition and Dining Programs"
             onerror="
               this.onerror = null;
               this.src =
@@ -1073,31 +1294,87 @@
       </div>
     </section>
 
-    <!-- Section: Testimonials -->
-    <section id="testimonials" class="grid-section reveal-fade-up">
-      <h2 class="section-title-line">Testimonials</h2>
-      <div class="custom-grid stagger-container">
-        <div class="feature-card testimonial-card reveal-child">
-          <p class="testimonial-text">
-            "Mum was very resistant to giving up her independence, and the staff
-            have bent over backwards to make this as smooth a transition as
-            possible."
-          </p>
-          <strong class="testimonial-author">KATE T (DAUGHTER)</strong>
-        </div>
-        <div class="feature-card testimonial-card reveal-child">
-          <p class="testimonial-text">
-            "My mum has been a resident for 6 weeks and I am very happy with the
-            care she is receiving. Congratulations on your CQC rating of good."
-          </p>
-          <strong class="testimonial-author">NIGEL B (SON)</strong>
-        </div>
-        <div class="feature-card testimonial-card reveal-child">
-          <p class="testimonial-text">
-            "I find everyone from the domestics to the carers very helpful. I
-            know he is being cared for and that makes me feel happier."
-          </p>
-          <strong class="testimonial-author">SUSAN S (WIFE)</strong>
+    <!-- Upgraded Bespoke Carousel Testimonials Section -->
+    <section id="testimonials" class="testimonials-section reveal-fade-up">
+      <div class="testimonials-container">
+        <p class="section-subtitle">Hear From Our Families</p>
+        <h2 class="section-title-line">Testimonials</h2>
+
+        <div class="testimonials-slider">
+          <div class="testimonial-track-container">
+            <div class="testimonial-track" id="testimonialTrack">
+              <!-- Slide 1 -->
+              <div class="testimonial-slide active">
+                <div class="testimonial-quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                  "Our Mother has been in Pennine for about 18 months. We are extremely happy with her care. The carers are attentitive, kind and friendly. The home is kept clean, bright and has beautiful views.They also provide activities for the residents, we are kept informed of any medical requirements."
+                </p>
+                <div class="testimonial-divider"></div>
+                <strong class="testimonial-author"
+                  >Julie G  
+                  <span class="author-relation">(DAUGHTER)published on 29 December 2025</span></strong
+                >
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                  "My mum is a resident here and I have to say, the home is amazing. Mum developed dementia and couldn't stay at home. We really struggled to find the right care home for Mum, but Pennine just stood out from all the rest. The staff are amazing, nothing is too much trouble. They are so friendly and attentive to all Mum's needs. The home management is nothing short of amazing, there is nothing she doesn't know. When we moved Mum into the home, the home management was so compassionate and empathetic, she completely understood what we were going through and instantly put our minds at ease. The home itself, is a lovely building, with stunning views of the surrounding hills. It currently going through some renovations, to modernise the building. The gardens have also been upgraded, which Mum got involved with by planting some flowers. Mum was an avid gardener and missed tending to her own garden at home. So for her to be able to help, was amazing for her."
+                </p>
+                <div class="testimonial-divider"></div>
+                <strong class="testimonial-author"
+                  > Hannah L <span class="author-relation">(Daughter of Resident) published on 29 July 2024</span></strong
+                >
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                  "After coming to Pennine for now 2 years, the staff/facilities well done all."
+                </p>
+                <div class="testimonial-divider"></div>
+                <strong class="testimonial-author"
+                  >Carol C . <span class="author-relation">(Wife of Resident) published on 15 December 2025</span></strong
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Slider Navigation Dot Indicators -->
+          <div class="testimonial-dots" id="testimonialDots">
+            <span class="dot active" data-slide-index="0"></span>
+            <span class="dot" data-slide-index="1"></span>
+            <span class="dot" data-slide-index="2"></span>
+          </div>
         </div>
       </div>
     </section>
@@ -1125,8 +1402,8 @@
         </div>
         <div class="peace-img">
           <img
-            src="quality-care.PNG"
-            alt="Quality Care"
+             src="PennineSuite.png"
+            alt="Quality Compassionate Care Specialists"
             onerror="
               this.onerror = null;
               this.src =
@@ -1137,10 +1414,11 @@
       </div>
     </section>
 
+    <!-- Awards & Affiliations Banner -->
     <div class="awards-strip reveal-fade-up">
       <img
         src="last-1-150x120.jpg"
-        alt="Award 1"
+        alt="Industry Association Award 1"
         onerror="
           this.onerror = null;
           this.src = 'https://placehold.co/150x120/ffffff/002b5b?text=Award+1';
@@ -1148,7 +1426,7 @@
       />
       <img
         src="last-2-150x120.jpg"
-        alt="Award 2"
+        alt="Care Standards Award 2"
         onerror="
           this.onerror = null;
           this.src = 'https://placehold.co/150x120/ffffff/002b5b?text=Award+2';
@@ -1156,7 +1434,7 @@
       />
       <img
         src="last-3.jpg"
-        alt="Award 3"
+        alt="Health Care Excellence Award 3"
         onerror="
           this.onerror = null;
           this.src = 'https://placehold.co/150x120/ffffff/002b5b?text=Award+3';
@@ -1164,7 +1442,7 @@
       />
       <img
         src="last-4.jpg"
-        alt="Award 4"
+        alt="Pennine CQC Good Quality Standard Award 4"
         onerror="
           this.onerror = null;
           this.src = 'https://placehold.co/150x120/ffffff/002b5b?text=Award+4';
@@ -1172,14 +1450,16 @@
       />
     </div>
 
+    <!-- Contact & Map Integration -->
     <div id="location" class="full-map-section">
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2374.346892556277!2d-1.954625223364239!3d53.46228396655512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bc78602b6677b%3A0xc33e0856019a7974!2sPennine%20Care%20Centre!5e0!3m2!1sen!2suk!4v1710000000000!5m2!1sen!2suk"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2376.868486526857!2d-1.9585225!3d53.4350597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bcb8dea4cf4d1%3A0xd8e4bf659910976f!2sPennine%20Care%20Centre!5e0!3m2!1sen!2sin!4v1779295008934!5m2!1sen!2sin"
         loading="lazy"
         title="Pennine Care Centre Map Location"
       ></iframe>
     </div>
 
+    <!-- Standard Core Footer -->
     <footer>
       <div class="footer-grid">
         <div class="footer-col">
@@ -1190,12 +1470,12 @@
           <h4>Navigation</h4>
           <a href="index.html" class="footer-link">About Us</a>
           <a href="#suites" class="footer-link">Our Suites</a>
-          <a href="moorland-suite.html" class="footer-link">Care Services</a>
+          <a href="services.html" class="footer-link">Care Services</a>
         </div>
         <div class="footer-col">
           <h4>Information</h4>
-          <a href="contact.html" class="footer-link">Careers</a>
-          <a href="contact.html" class="footer-link">Privacy Policy</a>
+          <a href="careers.html" class="footer-link">Careers</a>
+          <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
           <a href="life-at-pennine.html" class="footer-link">Life at Pennine</a>
         </div>
         <div class="footer-col">
@@ -1243,19 +1523,49 @@
       </div>
     </footer>
 
-    <!-- Floating WhatsApp CTA -->
-    <a href="https://wa.me/441457862466" class="whatsapp-float" target="_blank">
+    <!-- Floating Interactive WhatsApp CTA -->
+    <a
+      href="https://wa.me/441457862466"
+      class="whatsapp-float"
+      target="_blank"
+      aria-label="Chat on WhatsApp"
+    >
       <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
       (function () {
+        // --- MOBILE NAVIGATION SYSTEM (INTERACTION ENGAGED) ---
+        const mobileToggle = document.getElementById("mobileNavToggle");
+        const mobileOverlay = document.getElementById("mobileMenuOverlay");
+        const closeBtn = document.getElementById("closeMenuBtn");
+
+        if (mobileToggle && mobileOverlay) {
+          const openMenu = () => {
+            mobileOverlay.classList.add("open");
+            document.body.style.overflow = "hidden"; // Retain layout focus
+          };
+
+          const closeMenu = () => {
+            mobileOverlay.classList.remove("open");
+            document.body.style.overflow = ""; // Reactivate scroll
+          };
+
+          mobileToggle.addEventListener("click", openMenu);
+          if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+
+          // Close navigation panel automatically upon route choice
+          const overlayLinks = mobileOverlay.querySelectorAll("a");
+          overlayLinks.forEach((link) => {
+            link.addEventListener("click", closeMenu);
+          });
+        }
+
         // --- INTERSECTION OBSERVER ENGINE (SCROLL REVEALS) ---
         const scrollRevealCallback = (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("active");
-              // Unobserve once active to keep high rendering performance
               observer.unobserve(entry.target);
             }
           });
@@ -1267,7 +1577,6 @@
           rootMargin: "0px 0px -40px 0px",
         });
 
-        // Track and observe elements
         const elementsToObserve = document.querySelectorAll(
           ".reveal-fade-up, .reveal-scale-in, .stagger-container",
         );
@@ -1283,7 +1592,7 @@
           }
         });
 
-        // Audio Toggle Logic for background video
+        // --- HERO SCENE MEDIA CONTROLLER ---
         const video = document.getElementById("heroVideo");
         const audioBtn = document.getElementById("audioToggle");
         if (audioBtn && video) {
@@ -1299,9 +1608,7 @@
           });
         }
 
-        /**
-         * Reusable function to initialize a slider with high-performance CSS transforms
-         */
+        // --- HOMEPAGE PRESET IMAGE CAROUSELS ---
         function initSlider(sliderId, prevId, nextId) {
           const container = document.getElementById(sliderId);
           if (!container) return;
@@ -1352,9 +1659,65 @@
           startTimer();
         }
 
-        // Initialize sliders
         initSlider("pennine-slider", "penninePrev", "pennineNext");
         initSlider("moorland-slider", "moorlandPrev", "moorlandNext");
+
+        // --- HOMEPAGE BESPOKE TESTIMONIALS SLIDER ---
+        const testimonialTrack = document.getElementById("testimonialTrack");
+        const testimonialSlides =
+          document.querySelectorAll(".testimonial-slide");
+        const testimonialDots = document.querySelectorAll(
+          ".testimonial-dots .dot",
+        );
+        let activeTestimonialIndex = 0;
+        let testimonialTimer;
+
+        function navigateToTestimonial(index) {
+          if (!testimonialTrack || testimonialSlides.length === 0) return;
+
+          if (index >= testimonialSlides.length) index = 0;
+          if (index < 0) index = testimonialSlides.length - 1;
+
+          activeTestimonialIndex = index;
+          testimonialTrack.style.transform = `translateX(-${activeTestimonialIndex * 100}%)`;
+
+          testimonialSlides.forEach((slide, idx) => {
+            if (idx === activeTestimonialIndex) {
+              slide.classList.add("active");
+            } else {
+              slide.classList.remove("active");
+            }
+          });
+
+          testimonialDots.forEach((dot, idx) => {
+            if (idx === activeTestimonialIndex) {
+              dot.classList.add("active");
+            } else {
+              dot.classList.remove("active");
+            }
+          });
+        }
+
+        function launchTestimonialLoop() {
+          if (!testimonialTrack) return;
+          testimonialTimer = setInterval(() => {
+            navigateToTestimonial(activeTestimonialIndex + 1);
+          }, 6500);
+        }
+
+        function restartTestimonialLoop() {
+          clearInterval(testimonialTimer);
+          launchTestimonialLoop();
+        }
+
+        testimonialDots.forEach((dot, idx) => {
+          dot.addEventListener("click", () => {
+            navigateToTestimonial(idx);
+            restartTestimonialLoop();
+          });
+        });
+
+        launchTestimonialLoop();
       })();
     </script>
   </body>

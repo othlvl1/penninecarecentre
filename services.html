@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Our Care Services | Pennine Care Centre</title>
+    <!-- Font Awesome Icon Kit -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <!-- Premium Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=EB+Garamond:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap"
       rel="stylesheet"
@@ -44,6 +46,7 @@
         line-height: 1.7;
         -webkit-font-smoothing: antialiased;
         scroll-behavior: smooth;
+        font-size: 16px;
       }
 
       h1,
@@ -55,7 +58,7 @@
         font-weight: 600;
       }
 
-      /* NAVIGATION DESIGN & SCROLL MOTION */
+      /* DYNAMIC HEADER MOTION */
       nav {
         background-color: rgba(0, 43, 91, 0.94);
         padding: 1.2rem 5%;
@@ -98,6 +101,7 @@
         list-style: none;
         display: flex;
         gap: 25px;
+        align-items: center;
       }
 
       .nav-links a {
@@ -130,7 +134,86 @@
         color: var(--gold);
       }
 
-      /* HERO ENTRANCE EFFECTS */
+      /* MOBILE MENU HAMBURGER BUTTON */
+      .mobile-nav-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        z-index: 1100;
+      }
+      .mobile-nav-toggle .bar {
+        height: 3px;
+        width: 100%;
+        background-color: var(--white);
+        border-radius: 2px;
+        transition: var(--transition);
+      }
+
+      /* MOBILE OVERLAY NAVIGATION SYSTEM */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 43, 91, 0.99);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 1050;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mobile-menu-overlay.open {
+        right: 0;
+      }
+      .close-menu-btn {
+        position: absolute;
+        top: 30px;
+        right: 5%;
+        font-size: 3rem;
+        color: var(--white);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        line-height: 1;
+      }
+      .close-menu-btn:hover {
+        color: var(--gold);
+      }
+      .mobile-nav-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+      }
+      .mobile-nav-links a {
+        text-decoration: none;
+        color: var(--white);
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 2px;
+        font-family: var(--font-serif);
+        transition: var(--transition);
+        display: inline-block;
+      }
+      .mobile-nav-links a:hover,
+      .mobile-nav-links a.active {
+        color: var(--gold);
+        transform: scale(1.05);
+      }
+
+      /* HERO SUB BANNER */
       .hero-sub {
         height: 60vh;
         background:
@@ -163,10 +246,10 @@
       }
 
       .hero-sub h1 {
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-size: clamp(2.2rem, 6vw, 4.2rem);
         color: var(--gold);
         margin-bottom: 20px;
-        line-height: 1.2;
+        line-height: 1.25;
       }
 
       .hero-sub p {
@@ -176,7 +259,7 @@
         opacity: 0.95;
       }
 
-      /* HIGH-END SCROLL MOTION HOOKS */
+      /* SCROLL REVEAL TRIGGERS */
       .reveal-element {
         opacity: 0;
         transform: translateY(50px);
@@ -274,7 +357,6 @@
         color: var(--navy);
       }
 
-      /* Explicit desktop row-reversal overrides */
       @media (min-width: 969px) {
         .row-reverse-desktop {
           flex-direction: row-reverse;
@@ -332,55 +414,7 @@
         left: 100%;
       }
 
-      /* SPECIAL WELLBEING HIGHLIGHT CARD */
-      .wellbeing-highlight {
-        background: var(--navy);
-        color: var(--white) !important;
-        padding: 50px;
-        border-radius: 4px;
-        box-shadow: 20px 20px 0 var(--gold);
-        transition: var(--transition);
-      }
-      .wellbeing-highlight h2 {
-        color: var(--gold) !important;
-      }
-      .wellbeing-highlight h2::after {
-        background: var(--white) !important;
-        width: 0;
-      }
-      .reveal-element.active .wellbeing-highlight h2::after {
-        width: 60px;
-      }
-      .wellbeing-highlight p {
-        color: #e5e7eb !important;
-      }
-      .coming-soon-badge {
-        display: inline-block;
-        background: var(--gold);
-        color: var(--navy);
-        font-weight: 700;
-        padding: 5px 15px;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
-        border-radius: 2px;
-        animation: pulseGlow 2s infinite ease-in-out;
-      }
-
-      @keyframes pulseGlow {
-        0%,
-        100% {
-          transform: scale(1);
-          box-shadow: 0 0 0 rgba(197, 160, 89, 0);
-        }
-        50% {
-          transform: scale(1.02);
-          box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
-        }
-      }
-
-      /* FOOTER */
+      /* STANDARD FOOTER BLOCK */
       footer {
         background: var(--navy);
         color: #fff;
@@ -495,9 +529,16 @@
         transform: scale(1.15) translateY(-5px);
       }
 
+      /* STABLE RESPONSIVE OVERRIDES */
       @media (max-width: 968px) {
         nav {
           padding: 1rem 5%;
+        }
+        .nav-links {
+          display: none;
+        }
+        .mobile-nav-toggle {
+          display: flex;
         }
         .alternating-container {
           padding: 60px 5%;
@@ -515,9 +556,6 @@
         .row-image:hover {
           box-shadow: 15px 15px 0 var(--gold) !important;
         }
-        .nav-links {
-          display: none;
-        }
         .whatsapp-float {
           bottom: 20px;
           right: 20px;
@@ -525,24 +563,57 @@
           height: 50px;
           font-size: 25px;
         }
+        .footer-grid {
+          gap: 30px;
+        }
       }
     </style>
   </head>
   <body id="top">
+    <!-- Responsive Header / Navigation -->
     <nav id="mainNav">
       <a class="logo" href="index.html">Pennine Care Center</a>
+      <!-- Desktop Navigation Menu -->
       <ul class="nav-links">
         <li><a href="index.html">About Us</a></li>
         <li><a href="pennine-suite.html">Pennine Suite</a></li>
         <li><a href="moorland-suite.html">Moorland Suite</a></li>
-        <li>
-          <a href="services.html" class="active">Service</a>
-        </li>
+        <li><a href="services.html" class="active">Services</a></li>
         <li><a href="life-at-pennine.html">Life at Pennine</a></li>
-        <li><a href="team.html">Team</a></li>
+        <li><a href="team.html">Our Team</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <!-- Hamburger Menu Button -->
+      <button
+        class="mobile-nav-toggle"
+        id="mobileNavToggle"
+        aria-label="Open Navigation Menu"
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </nav>
+
+    <!-- Slide-in Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+      <button
+        class="close-menu-btn"
+        id="closeMenuBtn"
+        aria-label="Close Navigation Menu"
+      >
+        &times;
+      </button>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html">About Us</a></li>
+        <li><a href="pennine-suite.html">Pennine Suite</a></li>
+        <li><a href="moorland-suite.html">Moorland Suite</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="life-at-pennine.html">Life at Pennine</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="contact.html">Contact Menu</a></li>
+      </ul>
+    </div>
 
     <header class="hero-sub">
       <div class="hero-content">
@@ -555,9 +626,18 @@
     </header>
 
     <main class="alternating-container">
+      <!-- Row 1: Older People Care -->
       <div class="alternating-row reveal-element">
         <div class="row-image">
-          <img src="16.png" alt="Older People Care" />
+          <img
+            src="Copilot_20260520_210105.png"
+            alt="Older People Care Services"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Older+People+Care';
+            "
+          />
         </div>
         <div class="row-text">
           <h2>Older People Care</h2>
@@ -577,9 +657,18 @@
         </div>
       </div>
 
+      <!-- Row 2: Dementia Care -->
       <div class="alternating-row row-reverse-desktop reveal-element">
         <div class="row-image">
-          <img src="17.png" alt="Dementia Care" />
+          <img
+            src="Dementia Care.png"
+            alt="Compassionate Dementia Support Services"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Dementia+Care';
+            "
+          />
         </div>
         <div class="row-text">
           <h2>Dementia Care</h2>
@@ -601,9 +690,18 @@
         </div>
       </div>
 
+      <!-- Row 3: Male Only Unit -->
       <div class="alternating-row reveal-element">
         <div class="row-image">
-          <img src="3.PNG" alt="Male only Unit" />
+          <img
+            src="male only unit.png"
+            alt="Dedicated Male Only Care Environment"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Male+Only+Unit';
+            "
+          />
         </div>
         <div class="row-text">
           <h2>Male only Unit</h2>
@@ -623,9 +721,18 @@
         </div>
       </div>
 
+      <!-- Row 4: Rehabilitation -->
       <div class="alternating-row row-reverse-desktop reveal-element">
         <div class="row-image">
-          <img src="19.png" alt="Rehabilitation" />
+          <img
+            src="Inhouse Activities.png"
+            alt="Advanced Clinical Rehabilitation Programs"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=Rehabilitation';
+            "
+          />
         </div>
         <div class="row-text">
           <h2>Rehabilitation</h2>
@@ -644,9 +751,18 @@
         </div>
       </div>
 
+      <!-- Row 5: End of Life Care -->
       <div class="alternating-row reveal-element">
         <div class="row-image">
-          <img src="5.png" alt="End of life care" />
+          <img
+            src="End of life care.png"
+            alt="Dignified End of Life and Palliative Care"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'https://placehold.co/800x600/002b5b/ffffff?text=End+Of+Life+Care';
+            "
+          />
         </div>
         <div class="row-text">
           <h2>End of life care</h2>
@@ -669,6 +785,7 @@
       </div>
     </main>
 
+    <!-- Standard Core Footer -->
     <footer>
       <div class="footer-grid">
         <div class="footer-col">
@@ -679,12 +796,12 @@
           <h4>Navigation</h4>
           <a href="index.html" class="footer-link">About Us</a>
           <a href="index.html#suites" class="footer-link">Our Suites</a>
-          <a href="moorland-suite.html" class="footer-link">Care Services</a>
+          <a href="services.html" class="footer-link">Care Services</a>
         </div>
         <div class="footer-col">
           <h4>Information</h4>
-          <a href="contact.html" class="footer-link">Careers</a>
-          <a href="contact.html" class="footer-link">Privacy Policy</a>
+          <a href="careers.html" class="footer-link">Careers</a>
+          <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
           <a href="life-at-pennine.html" class="footer-link">Life at Pennine</a>
         </div>
         <div class="footer-col">
@@ -732,13 +849,43 @@
       </div>
     </footer>
 
-    <!-- Floating WhatsApp CTA -->
-    <a href="https://wa.me/441457862466" class="whatsapp-float" target="_blank">
+    <!-- Floating Interactive WhatsApp CTA -->
+    <a
+      href="https://wa.me/441457862466"
+      class="whatsapp-float"
+      target="_blank"
+      aria-label="Chat on WhatsApp"
+    >
       <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
       (function () {
+        // --- MOBILE NAVIGATION SYSTEM ---
+        const mobileToggle = document.getElementById("mobileNavToggle");
+        const mobileOverlay = document.getElementById("mobileMenuOverlay");
+        const closeBtn = document.getElementById("closeMenuBtn");
+
+        if (mobileToggle && mobileOverlay) {
+          const openMenu = () => {
+            mobileOverlay.classList.add("open");
+            document.body.style.overflow = "hidden";
+          };
+
+          const closeMenu = () => {
+            mobileOverlay.classList.remove("open");
+            document.body.style.overflow = "";
+          };
+
+          mobileToggle.addEventListener("click", openMenu);
+          if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+
+          const overlayLinks = mobileOverlay.querySelectorAll("a");
+          overlayLinks.forEach((link) => {
+            link.addEventListener("click", closeMenu);
+          });
+        }
+
         // --- INTERSECTION OBSERVER (REVEAL MOTION ON SCROLL) ---
         const revealElements = document.querySelectorAll(".reveal-element");
 

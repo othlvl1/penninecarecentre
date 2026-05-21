@@ -225,6 +225,27 @@
         transform: scale(1.05) !important;
       }
 
+      /* Inline Image Slider Support for Alternate Rows */
+      .row-image .slider-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transform: scale(1.15);
+        transition:
+          opacity 1s ease-in-out,
+          transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+        object-fit: cover;
+        will-change: transform, opacity;
+      }
+      .row-image .slider-img.active {
+        opacity: 1;
+        position: relative;
+        transform: scale(1);
+      }
+
       .row-text {
         flex: 1.2;
       }
@@ -683,9 +704,9 @@
         <li><a href="index.html">About Us</a></li>
         <li><a href="pennine-suite.html">Pennine Suite</a></li>
         <li><a href="moorland-suite.html" class="active">Moorland Suite</a></li>
-        <li><a href="services.html">Service</a></li>
+        <li><a href="services.html">Services</a></li>
         <li><a href="life-at-pennine.html">Life at Pennine</a></li>
-        <li><a href="team.html">Team</a></li>
+        <li><a href="team.html">Our Team</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -698,17 +719,55 @@
     </header>
 
     <main class="alternating-container">
-      <!-- Row 1: Image Left, Text Right on Desktop -->
+      <!-- Row 1: Image Left (Slider Gallery), Text Right on Desktop -->
       <div class="alternating-row reveal-element">
-        <div class="row-image">
+        <div class="row-image" id="haven-slider">
           <img
-            src="11.png"
+            src="Community Spaces 1.png"
+            class="slider-img active"
             alt="Life at Moorland Suite"
             onerror="
               this.onerror = null;
               this.src = 'MoorlandSuite.png';
             "
           />
+          <img
+            src="24.png"
+            class="slider-img"
+            alt="Moorland Suite Garden Exterior"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/800x600/002b5b/ffffff?text=Garden+Exterior';
+            "
+          />
+          <img
+            src="pennine entrance.PNG"
+            class="slider-img"
+            alt="Moorland Suite Entrance Path"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/800x600/002b5b/ffffff?text=Entrance+Path';
+            "
+          />
+          <!-- Inline Slide Navigation Arrows -->
+          <div class="slider-nav" style="padding: 0 15px;">
+            <button
+              class="slider-arrow"
+              id="havenPrev"
+              aria-label="Previous Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-left" style="font-size: 0.95rem;"></i>
+            </button>
+            <button
+              class="slider-arrow"
+              id="havenNext"
+              aria-label="Next Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-right" style="font-size: 0.95rem;"></i>
+            </button>
+          </div>
         </div>
         <div class="row-text">
           <h2>An Elegant Haven for Gentlemen</h2>
@@ -742,17 +801,55 @@
         </div>
       </div>
 
-      <!-- Row 2: Text Left, Image Right on Desktop (Using explicit utility class) -->
+      <!-- Row 2: Text Left, Image Right (Slider Gallery) on Desktop -->
       <div class="alternating-row row-reverse-desktop reveal-element">
-        <div class="row-image">
+        <div class="row-image" id="spaces-slider">
           <img
-            src="12.png"
+            src="An Elegant Haven for Gentlemen.png"
+            class="slider-img active"
             alt="Moorland Suite Community Spaces"
             onerror="
               this.onerror = null;
               this.src = 'MoorlandSuite1.png';
             "
           />
+          <img
+            src="22.png"
+            class="slider-img"
+            alt="Moorland Suite Lounge Area"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/800x600/002b5b/ffffff?text=Lounge+Area';
+            "
+          />
+          <img
+            src="Community Spaces 4.png"
+            class="slider-img"
+            alt="Moorland Suite Dining Area"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/800x600/002b5b/ffffff?text=Dining+Area';
+            "
+          />
+          <!-- Inline Slide Navigation Arrows -->
+          <div class="slider-nav" style="padding: 0 15px;">
+            <button
+              class="slider-arrow"
+              id="spacesPrev"
+              aria-label="Previous Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-left" style="font-size: 0.95rem;"></i>
+            </button>
+            <button
+              class="slider-arrow"
+              id="spacesNext"
+              aria-label="Next Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-right" style="font-size: 0.95rem;"></i>
+            </button>
+          </div>
         </div>
         <div class="row-text">
           <h2>Community Spaces</h2>
@@ -774,17 +871,55 @@
         </div>
       </div>
 
-      <!-- Row 3: Image Left, Text Right on Desktop -->
+      <!-- Row 3: Image Left (Slider Gallery), Text Right on Desktop -->
       <div class="alternating-row reveal-element">
-        <div class="row-image">
+        <div class="row-image" id="bedrooms-slider">
           <img
-            src="13.png"
+            src="26.png"
+            class="slider-img active"
             alt="Tailored Spacious Bedrooms"
             onerror="
               this.onerror = null;
               this.src = 'MoorlandSuite2.png';
             "
           />
+          <img
+            src="26.png"
+            class="slider-img"
+            alt="Moorland Suite Cozy Bedroom"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/800x600/002b5b/ffffff?text=Bedroom+View';
+            "
+          />
+          <img
+            src="26.png"
+            class="slider-img"
+            alt="Moorland Suite Scenic Room View"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/800x600/002b5b/ffffff?text=Scenic+Room';
+            "
+          />
+          <!-- Inline Slide Navigation Arrows -->
+          <div class="slider-nav" style="padding: 0 15px;">
+            <button
+              class="slider-arrow"
+              id="bedroomsPrev"
+              aria-label="Previous Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-left" style="font-size: 0.95rem;"></i>
+            </button>
+            <button
+              class="slider-arrow"
+              id="bedroomsNext"
+              aria-label="Next Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-right" style="font-size: 0.95rem;"></i>
+            </button>
+          </div>
         </div>
         <div class="row-text">
           <h2>Private, Tailored Bedrooms</h2>
@@ -804,17 +939,55 @@
         </div>
       </div>
 
-      <!-- Row 4: Text Left, Image Right on Desktop (Using explicit utility class) -->
+      <!-- Row 4: Text Left, Image Right (Slider Gallery) on Desktop -->
       <div class="alternating-row row-reverse-desktop reveal-element">
-        <div class="row-image">
+        <div class="row-image" id="gardens-slider">
           <img
-            src="14.png"
+            src="Tranquil Gardens & Outdoors 3.png"
+            class="slider-img active"
             alt="Scenic Peak District Gardens"
             onerror="
               this.onerror = null;
               this.src = 'MoorlandSuite3.png';
             "
           />
+          <img
+            src="MoorlandSuite.png"
+            class="slider-img"
+            alt="Moorland Suite Secure Patio Area"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/800x600/002b5b/ffffff?text=Patio+Area';
+            "
+          />
+          <img
+            src="Copilot_20260520_103057.png"
+            class="slider-img"
+            alt="Outdoor Relaxation Spaces"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/800x600/002b5b/ffffff?text=Relaxation+Space';
+            "
+          />
+          <!-- Inline Slide Navigation Arrows -->
+          <div class="slider-nav" style="padding: 0 15px;">
+            <button
+              class="slider-arrow"
+              id="gardensPrev"
+              aria-label="Previous Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-left" style="font-size: 0.95rem;"></i>
+            </button>
+            <button
+              class="slider-arrow"
+              id="gardensNext"
+              aria-label="Next Image"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="fas fa-chevron-right" style="font-size: 0.95rem;"></i>
+            </button>
+          </div>
         </div>
         <div class="row-text">
           <h2>Secure, Healing Gardens</h2>
@@ -1006,8 +1179,8 @@
         </div>
         <div class="footer-col">
           <h4>Information</h4>
-          <a href="contact.html" class="footer-link">Careers</a>
-          <a href="contact.html" class="footer-link">Privacy Policy</a>
+          <a href="careers.html" class="footer-link">Careers</a>
+          <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
           <a href="life-at-pennine.html" class="footer-link">Life at Pennine</a>
         </div>
         <div class="footer-col">
@@ -1091,6 +1264,63 @@
             nav.classList.remove("scrolled");
           }
         });
+
+        // --- INLINE ROW SLIDER CONTROL ---
+        function initRowSlider(sliderId, prevId, nextId) {
+          const container = document.getElementById(sliderId);
+          if (!container) return;
+
+          const images = container.querySelectorAll(".slider-img");
+          const nextBtn = document.getElementById(nextId);
+          const prevBtn = document.getElementById(prevId);
+
+          let currentIndex = Array.from(images).findIndex((img) =>
+            img.classList.contains("active"),
+          );
+          if (currentIndex === -1) currentIndex = 0;
+
+          let slideInterval;
+
+          function showSlide(index) {
+            images[currentIndex].classList.remove("active");
+            currentIndex = (index + images.length) % images.length;
+            images[currentIndex].classList.add("active");
+          }
+
+          function startTimer() {
+            slideInterval = setInterval(
+              () => showSlide(currentIndex + 1),
+              5500,
+            );
+          }
+
+          function resetTimer() {
+            clearInterval(slideInterval);
+            startTimer();
+          }
+
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              showSlide(currentIndex + 1);
+              resetTimer();
+            });
+          }
+
+          if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+              showSlide(currentIndex - 1);
+              resetTimer();
+            });
+          }
+
+          startTimer();
+        }
+
+        // Initialize sliders for alternating content rows
+        initRowSlider("haven-slider", "havenPrev", "havenNext");
+        initRowSlider("spaces-slider", "spacesPrev", "spacesNext");
+        initRowSlider("bedrooms-slider", "bedroomsPrev", "bedroomsNext");
+        initRowSlider("gardens-slider", "gardensPrev", "gardensNext");
 
         // --- GALLERY SLIDER CONTROL ---
         const track = document.getElementById("image-track");
