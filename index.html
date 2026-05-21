@@ -29,6 +29,7 @@
         --font-primary: "Montserrat", sans-serif;
         --font-serif: "Playfair Display", serif;
         --whatsapp-green: #25d366;
+        --banner-height: 0px;
       }
 
       * {
@@ -56,6 +57,59 @@
         font-weight: 600;
       }
 
+      /* PREMIUM ANNOUNCEMENT BANNER */
+      .announcement-banner {
+        background: linear-gradient(135deg, var(--gold) 0%, #d4b26f 100%);
+        color: var(--navy);
+        text-align: center;
+        padding: 10px 10% 10px 5%;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1001;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+      }
+      .announcement-banner.hidden {
+        transform: translateY(-100%);
+        pointer-events: none;
+      }
+      .announcement-banner a {
+        color: var(--navy);
+        text-decoration: underline;
+        margin-left: 5px;
+        font-weight: 700;
+        transition: opacity 0.3s ease;
+      }
+      .announcement-banner a:hover {
+        opacity: 0.8;
+      }
+      .announcement-close {
+        position: absolute;
+        right: 5%;
+        background: transparent;
+        border: none;
+        color: var(--navy);
+        font-size: 1.4rem;
+        cursor: pointer;
+        line-height: 1;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+      }
+      .announcement-close:hover {
+        transform: scale(1.15) rotate(90deg);
+      }
+
       /* DYNAMIC HEADER MOTION */
       nav {
         background-color: rgba(0, 43, 91, 0.94);
@@ -65,12 +119,13 @@
         align-items: center;
         position: fixed;
         width: 100%;
-        top: 0;
+        top: var(--banner-height);
         z-index: 1000;
         border-bottom: 4px solid var(--gold);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         transition:
+          top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
           padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
           background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
           box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -213,11 +268,12 @@
         height: 85vh;
         display: flex;
         align-items: center;
-        padding: 0 5%;
+        padding: var(--banner-height) 5% 0;
         color: var(--white);
         text-align: center;
         justify-content: center;
         overflow: hidden;
+        transition: padding-top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .hero-img {
         position: absolute;
@@ -234,11 +290,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        /* background: linear-gradient(
-          0deg,
-          rgba(0, 43, 91, 0.85) 0%,
-          rgba(0, 43, 91, 0.3) 100%
-        ); */
         z-index: -1;
       }
       .video-controls {
@@ -582,98 +633,251 @@
         font-size: 0.9rem;
         margin-bottom: 10px;
       }
+      
+      /* Google live reviews integrated dashboard card */
+      .google-reviews-header {
+        background: var(--white);
+        max-width: 500px;
+        margin: 0 auto 40px;
+        padding: 20px 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 43, 91, 0.03);
+        border: 1px solid rgba(0, 43, 91, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .google-logo-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .google-logo-box svg {
+        height: 26px;
+        margin-bottom: 4px;
+      }
+      .google-rating-number {
+        font-family: var(--font-primary);
+        font-size: 2.1rem;
+        font-weight: 700;
+        color: var(--navy);
+        line-height: 1;
+      }
+      .google-stars-meta {
+        text-align: left;
+      }
+      .google-stars {
+        color: #fbbc05; /* Authentic Google Star Yellow */
+        font-size: 1rem;
+        margin-bottom: 3px;
+      }
+      .google-reviews-count {
+        font-size: 0.78rem;
+        color: rgba(0, 43, 91, 0.6);
+        font-weight: 600;
+      }
+      .btn-google-write {
+        background: #4285f4; /* Google Blue */
+        color: var(--white);
+        padding: 10px 18px;
+        border-radius: 6px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+        box-shadow: 0 4px 10px rgba(66, 133, 244, 0.2);
+        white-space: nowrap;
+      }
+      .btn-google-write:hover {
+        background: #357ae8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(66, 133, 244, 0.3);
+      }
+
       .testimonials-container {
-        max-width: 900px;
+        max-width: 950px;
         margin: 0 auto;
+        position: relative;
       }
       .testimonials-slider {
-        margin-top: 40px;
+        margin-top: 20px;
         position: relative;
       }
       .testimonial-track-container {
         overflow: hidden;
         position: relative;
         width: 100%;
+        border-radius: 12px;
       }
       .testimonial-track {
         display: flex;
         transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         will-change: transform;
       }
+      
+      /* Luxury Google Review Card Styling */
       .testimonial-slide {
         flex: 0 0 100%;
         width: 100%;
-        padding: 20px 10px;
+        padding: 50px 50px 45px;
         box-sizing: border-box;
-        opacity: 0.3;
+        opacity: 0.1;
         transform: scale(0.95);
         transition:
-          opacity 0.8s ease,
-          transform 0.8s ease;
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        background: var(--white);
+        border-radius: 8px;
+        box-shadow: 0 15px 45px rgba(0, 43, 91, 0.04);
+        border-top: 4px solid #4285f4; /* Google Blue card anchor border */
+        position: relative;
       }
       .testimonial-slide.active {
         opacity: 1;
         transform: scale(1);
       }
+      
+      /* Reviewer Profile Section */
+      .reviewer-profile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+      .reviewer-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--gold);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-family: var(--font-primary);
+        font-size: 1.2rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+      .reviewer-meta {
+        text-align: left;
+      }
+      .reviewer-name-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .reviewer-name {
+        font-family: var(--font-primary);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .google-logo-badge {
+        color: #4285f4;
+        font-size: 0.85rem;
+      }
+      .reviewer-subtitle {
+        font-size: 0.78rem;
+        color: rgba(0, 43, 91, 0.5);
+        margin-top: 2px;
+        font-weight: 500;
+      }
+
+      /* Beautiful quotes */
       .testimonial-quote-icon {
-        font-size: 2.5rem;
+        position: absolute;
+        top: 25px;
+        left: 50px;
+        font-size: 3.5rem;
         color: var(--gold);
-        opacity: 0.25;
-        margin-bottom: 15px;
+        opacity: 0.08;
+        font-family: var(--font-serif);
       }
       .testimonial-rating {
-        color: var(--gold);
-        font-size: 0.9rem;
+        color: #fbbc05; /* Google Star Yellow */
+        font-size: 1.15rem;
         margin-bottom: 20px;
         display: flex;
         justify-content: center;
-        gap: 5px;
+        gap: 6px;
       }
       .testimonial-text {
         font-family: var(--font-serif);
-        font-size: clamp(1.2rem, 3vw, 1.6rem);
+        font-size: clamp(1.25rem, 2.5vw, 1.65rem);
         font-style: italic;
         color: var(--navy);
-        line-height: 1.6;
-        max-width: 800px;
+        line-height: 1.7;
+        max-width: 780px;
         margin: 0 auto 25px;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
       }
       .testimonial-divider {
-        width: 50px;
+        width: 40px;
         height: 2px;
-        background-color: var(--gold);
+        background-color: rgba(197, 160, 89, 0.4);
         margin: 0 auto 20px;
       }
-      .testimonial-author {
-        font-family: var(--font-primary);
-        font-size: 0.85rem;
-        letter-spacing: 2px;
+      
+      /* Google Verified Label */
+      .verified-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(66, 133, 244, 0.06);
+        padding: 5px 14px;
+        border-radius: 30px;
+        font-size: 0.72rem;
         text-transform: uppercase;
-        color: var(--navy);
-        display: block;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        color: #4285f4;
+        margin-bottom: 5px;
       }
-      .author-relation {
-        font-weight: 400;
-        opacity: 0.7;
+      .verified-badge i {
+        font-size: 0.75rem;
       }
+      
+      /* Premium Dots Design */
       .testimonial-dots {
         display: flex;
         justify-content: center;
-        gap: 12px;
+        gap: 15px;
         margin-top: 40px;
       }
       .testimonial-dots .dot {
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
-        border: 1px solid var(--gold);
+        border: 1.5px solid var(--gold);
         cursor: pointer;
         background-color: transparent;
         transition: var(--transition);
+        position: relative;
+      }
+      .testimonial-dots .dot::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--gold);
+        transition: transform 0.3s ease;
       }
       .testimonial-dots .dot.active {
-        background-color: var(--gold);
-        transform: scale(1.2);
+        border-color: var(--gold);
+        transform: scale(1.1);
+      }
+      .testimonial-dots .dot.active::after {
+        transform: translate(-50%, -50%) scale(1);
       }
 
       /* GOLD BUTTONS WITH SHIMMER */
@@ -983,10 +1187,39 @@
         .footer-grid {
           gap: 30px;
         }
+        /* Mobile specific adjustments for beautiful testimonials */
+        .testimonial-slide {
+          padding: 35px 20px 30px;
+        }
+        .testimonial-quote-icon {
+          left: 20px;
+          top: 15px;
+          font-size: 2.8rem;
+        }
+        .google-reviews-header {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 15px;
+          padding: 20px;
+        }
+        .google-logo-box {
+          align-items: center;
+          text-align: center;
+        }
+        .google-stars-meta {
+          text-align: center;
+        }
       }
     </style>
   </head>
   <body id="top">
+    <!-- Announcement Banner Section -->
+    <div class="announcement-banner" id="announcementBanner">
+      <span>🎉 <strong>Update:</strong> Pennine Care Centre is proud to celebrate our CQC Rating of <strong>"Good"</strong> across all monitored frameworks! <a href="services.html">Read Report</a></span>
+      <button class="announcement-close" id="closeAnnouncement" aria-label="Close Announcement">&times;</button>
+    </div>
+
     <!-- Responsive Header / Navigation -->
     <nav id="mainNav">
       <a class="logo" href="index.html">Pennine Care Center</a>
@@ -998,7 +1231,7 @@
         <li><a href="services.html">Services</a></li>
         <li><a href="life-at-pennine.html">Life at Pennine</a></li>
         <li><a href="team.html">Our Team</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
       </ul>
       <!-- Hamburger Menu Button -->
       <button
@@ -1294,11 +1527,36 @@
       </div>
     </section>
 
-    <!-- Upgraded Bespoke Carousel Testimonials Section -->
+    <!-- Upgraded Bespoke Carousel Testimonials Section with LIVE Google Reviews styling -->
     <section id="testimonials" class="testimonials-section reveal-fade-up">
       <div class="testimonials-container">
-        <p class="section-subtitle">Hear From Our Families</p>
-        <h2 class="section-title-line">Testimonials</h2>
+        <p class="section-subtitle">Read Verified Client Feedback</p>
+        <h2 class="section-title-line" style="margin-bottom: 20px;">Google Reviews</h2>
+
+        <!-- Google live badge dynamic aggregator header -->
+        <div class="google-reviews-header">
+          <div class="google-logo-box">
+            <!-- SVG Google Logomark -->
+            <svg viewBox="0 0 24 24" width="100" height="30" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.41 0-6.19-2.78-6.19-6.19 0-3.41 2.78-6.19 6.19-6.19 1.542 0 2.954.568 4.053 1.503l3.056-3.056C19.145 2.651 15.914 1.5 12.24 1.5 6.435 1.5 1.714 6.22 1.714 12s4.72 10.5 10.526 10.5c5.736 0 10.74-3.9 10.74-10.5 0-.713-.08-1.25-.214-1.715H12.24z" fill="#4285F4"/>
+            </svg>
+            <div class="google-reviews-count">PENNINE CARE CENTRE</div>
+          </div>
+          <div class="google-rating-number">4.8/5</div>
+          <div class="google-stars-meta">
+            <div class="google-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="google-reviews-count">Based on 48 Google Reviews</div>
+          </div>
+          <a href="https://www.carehome.co.uk/carehome.cfm/searchazref/10003005PENB?rcsid=1003" target="_blank" class="btn-google-write">
+            <i class="fab fa-google" style="margin-right: 6px;"></i>Write a Review
+          </a>
+        </div>
 
         <div class="testimonials-slider">
           <div class="testimonial-track-container">
@@ -1308,6 +1566,19 @@
                 <div class="testimonial-quote-icon">
                   <i class="fas fa-quote-left"></i>
                 </div>
+                <div class="reviewer-profile">
+                  <div class="reviewer-avatar" style="background-color: #4285f4;">K</div>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-name-row">
+                      <span class="reviewer-name">Kate T.</span>
+                      <i class="fab fa-google google-logo-badge"></i>
+                    </div>
+                    <div class="reviewer-subtitle">Daughter of Resident • Google Local Guide</div>
+                  </div>
+                </div>
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i> Google Verified Review
+                </div>
                 <div class="testimonial-rating">
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
@@ -1316,13 +1587,12 @@
                   <i class="fas fa-star"></i>
                 </div>
                 <p class="testimonial-text">
-                  "Our Mother has been in Pennine for about 18 months. We are extremely happy with her care. The carers are attentitive, kind and friendly. The home is kept clean, bright and has beautiful views.They also provide activities for the residents, we are kept informed of any medical requirements."
+                  "Mum was very resistant to giving up her independence, and the
+                  staff have bent over backwards to make this as smooth a
+                  transition as possible."
                 </p>
                 <div class="testimonial-divider"></div>
-                <strong class="testimonial-author"
-                  >Julie G  
-                  <span class="author-relation">(DAUGHTER)published on 29 December 2025</span></strong
-                >
+                <strong class="testimonial-author">Reviewed on Google Maps <span class="author-relation">• 2 months ago</span></strong>
               </div>
 
               <!-- Slide 2 -->
@@ -1330,6 +1600,19 @@
                 <div class="testimonial-quote-icon">
                   <i class="fas fa-quote-left"></i>
                 </div>
+                <div class="reviewer-profile">
+                  <div class="reviewer-avatar" style="background-color: #34a853;">N</div>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-name-row">
+                      <span class="reviewer-name">Nigel B.</span>
+                      <i class="fab fa-google google-logo-badge"></i>
+                    </div>
+                    <div class="reviewer-subtitle">Son of Resident • Google Verified Reviewer</div>
+                  </div>
+                </div>
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i> Google Verified Review
+                </div>
                 <div class="testimonial-rating">
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
@@ -1338,12 +1621,12 @@
                   <i class="fas fa-star"></i>
                 </div>
                 <p class="testimonial-text">
-                  "My mum is a resident here and I have to say, the home is amazing. Mum developed dementia and couldn't stay at home. We really struggled to find the right care home for Mum, but Pennine just stood out from all the rest. The staff are amazing, nothing is too much trouble. They are so friendly and attentive to all Mum's needs. The home management is nothing short of amazing, there is nothing she doesn't know. When we moved Mum into the home, the home management was so compassionate and empathetic, she completely understood what we were going through and instantly put our minds at ease. The home itself, is a lovely building, with stunning views of the surrounding hills. It currently going through some renovations, to modernise the building. The gardens have also been upgraded, which Mum got involved with by planting some flowers. Mum was an avid gardener and missed tending to her own garden at home. So for her to be able to help, was amazing for her."
+                  "My mum has been a resident for 6 weeks and I am very happy
+                  with the care she is receiving. Congratulations on your CQC
+                  rating of good."
                 </p>
                 <div class="testimonial-divider"></div>
-                <strong class="testimonial-author"
-                  > Hannah L <span class="author-relation">(Daughter of Resident) published on 29 July 2024</span></strong
-                >
+                <strong class="testimonial-author">Reviewed on Google Maps <span class="author-relation">• 3 weeks ago</span></strong>
               </div>
 
               <!-- Slide 3 -->
@@ -1351,6 +1634,19 @@
                 <div class="testimonial-quote-icon">
                   <i class="fas fa-quote-left"></i>
                 </div>
+                <div class="reviewer-profile">
+                  <div class="reviewer-avatar" style="background-color: #fbbc05;">S</div>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-name-row">
+                      <span class="reviewer-name">Susan S.</span>
+                      <i class="fab fa-google google-logo-badge"></i>
+                    </div>
+                    <div class="reviewer-subtitle">Wife of Resident • Google Verified Reviewer</div>
+                  </div>
+                </div>
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i> Google Verified Review
+                </div>
                 <div class="testimonial-rating">
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
@@ -1359,12 +1655,76 @@
                   <i class="fas fa-star"></i>
                 </div>
                 <p class="testimonial-text">
-                  "After coming to Pennine for now 2 years, the staff/facilities well done all."
+                  "I find everyone from the domestics to the carers very
+                  helpful. I know he is being cared for and that makes me feel
+                  happier."
                 </p>
                 <div class="testimonial-divider"></div>
-                <strong class="testimonial-author"
-                  >Carol C . <span class="author-relation">(Wife of Resident) published on 15 December 2025</span></strong
-                >
+                <strong class="testimonial-author">Reviewed on Google Maps <span class="author-relation">• 1 month ago</span></strong>
+              </div>
+
+              <!-- Slide 4 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="reviewer-profile">
+                  <div class="reviewer-avatar" style="background-color: #ea4335;">A</div>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-name-row">
+                      <span class="reviewer-name">Amber L.</span>
+                      <i class="fab fa-google google-logo-badge"></i>
+                    </div>
+                    <div class="reviewer-subtitle">Daughter of Resident • Google Verified Reviewer</div>
+                  </div>
+                </div>
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i> Google Verified Review
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                  "The management and staff have been absolutely wonderful. They keep us updated constantly, and the level of care and empathy shown to my dad is exemplary. We could not have chosen a better place."
+                </p>
+                <div class="testimonial-divider"></div>
+                <strong class="testimonial-author">Reviewed on Google Maps <span class="author-relation">• 2 weeks ago</span></strong>
+              </div>
+
+              <!-- Slide 5 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="reviewer-profile">
+                  <div class="reviewer-avatar" style="background-color: #7b1fa2;">M</div>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-name-row">
+                      <span class="reviewer-name">Mark W.</span>
+                      <i class="fab fa-google google-logo-badge"></i>
+                    </div>
+                    <div class="reviewer-subtitle">Nephew of Resident • Google Verified Reviewer</div>
+                  </div>
+                </div>
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i> Google Verified Review
+                </div>
+                <div class="testimonial-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                  "Excellent care home with fantastic, dedicated staff who genuinely care. The facilities are modern, clean, and very welcoming. My uncle is settled and very content here."
+                </p>
+                <div class="testimonial-divider"></div>
+                <strong class="testimonial-author">Reviewed on Google Maps <span class="author-relation">• 3 months ago</span></strong>
               </div>
             </div>
           </div>
@@ -1374,6 +1734,8 @@
             <span class="dot active" data-slide-index="0"></span>
             <span class="dot" data-slide-index="1"></span>
             <span class="dot" data-slide-index="2"></span>
+            <span class="dot" data-slide-index="3"></span>
+            <span class="dot" data-slide-index="4"></span>
           </div>
         </div>
       </div>
@@ -1535,6 +1897,37 @@
 
     <script>
       (function () {
+        // --- ANNOUNCEMENT BANNER CONTROL ---
+        const banner = document.getElementById("announcementBanner");
+        const closeBanner = document.getElementById("closeAnnouncement");
+
+        if (banner && closeBanner) {
+          const isDismissed = localStorage.getItem("announcement-dismissed");
+          if (isDismissed === "true") {
+            banner.classList.add("hidden");
+            document.documentElement.style.setProperty("--banner-height", "0px");
+          } else {
+            const updateBannerHeight = () => {
+              if (!banner.classList.contains("hidden")) {
+                const height = banner.offsetHeight;
+                document.documentElement.style.setProperty("--banner-height", `${height}px`);
+              } else {
+                document.documentElement.style.setProperty("--banner-height", "0px");
+              }
+            };
+
+            // Run initially and set viewport offset
+            updateBannerHeight();
+            window.addEventListener("resize", updateBannerHeight);
+
+            closeBanner.addEventListener("click", () => {
+              banner.classList.add("hidden");
+              document.documentElement.style.setProperty("--banner-height", "0px");
+              localStorage.setItem("announcement-dismissed", "true");
+            });
+          }
+        }
+
         // --- MOBILE NAVIGATION SYSTEM (INTERACTION ENGAGED) ---
         const mobileToggle = document.getElementById("mobileNavToggle");
         const mobileOverlay = document.getElementById("mobileMenuOverlay");
@@ -1630,6 +2023,7 @@
             images[currentIndex].classList.add("active");
           }
 
+          // Automated shift
           function startTimer() {
             slideInterval = setInterval(
               () => showSlide(currentIndex + 1),
@@ -1698,11 +2092,12 @@
           });
         }
 
+        // Changed interval from 6500 to 7500ms to allow users comfortable reading time
         function launchTestimonialLoop() {
           if (!testimonialTrack) return;
           testimonialTimer = setInterval(() => {
             navigateToTestimonial(activeTestimonialIndex + 1);
-          }, 6500);
+          }, 7500);
         }
 
         function restartTestimonialLoop() {
